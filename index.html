@@ -45,7 +45,7 @@
 
     /* HERO */
     .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background: url('img/compass.jpg') center center / cover no-repeat; filter: brightness(0.5); }
+    .hero-bg { position: absolute; inset: 0; background: url('Art/compass.jpg') center center / cover no-repeat; filter: brightness(0.5); }
     .hero-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 20%, rgba(10,10,15,0.5) 60%, rgba(10,10,15,0.95) 100%), linear-gradient(180deg, rgba(10,10,15,0.4) 0%, transparent 30%, transparent 70%, rgba(10,10,15,1) 100%); }
     .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 20px; }
     .hero-title { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 5rem); font-weight: 900; letter-spacing: 8px; color: var(--gold-light); text-shadow: 0 0 40px rgba(184,157,106,0.3), 0 0 80px rgba(184,157,106,0.1); margin-bottom: 16px; line-height: 1.2; animation: fadeUp 1.5s ease-out; }
@@ -115,7 +115,7 @@
 
     /* ABOUT */
     .about-section { position: relative; overflow: hidden; }
-    .about-bg { position: absolute; inset: 0; background: url('img/ruins.jpg') center center / cover no-repeat; opacity: 0.06; filter: blur(2px); }
+    .about-bg { position: absolute; inset: 0; background: url('Art/ruins.jpg') center center / cover no-repeat; opacity: 0.06; filter: blur(2px); }
     .about-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; text-align: center; }
     .about-text { font-size: 1.15rem; font-weight: 300; line-height: 2; color: var(--cream); opacity: 0.85; }
     .about-text em { color: var(--gold); font-style: italic; }
@@ -194,7 +194,7 @@
 
       <div class="custom-player reveal" id="player">
         <div class="cp-header">
-          <div class="cp-art"><img id="playerArt" src="img/novafide.png" alt="Album art"></div>
+          <div class="cp-art"><img id="playerArt" src="Art/novafide.png" alt="Album art"></div>
           <div class="cp-info">
             <div class="cp-album-title" id="playerAlbumTitle">NovaFide</div>
             <div class="cp-album-type" id="playerAlbumType">Single · 2026</div>
@@ -293,8 +293,8 @@
     ════════════════════════════════════════════════════════
     HOW TO ADD / UPDATE MUSIC:
 
-    1. Drop album art into the img/ folder (png or jpg)
-    2. Create a subfolder in music/ for the album (e.g. music/newalbum/)
+    1. Drop album art into the Art/ folder (png or jpg)
+    2. Create a subfolder in Songs/ for the album (e.g. Songs/NewAlbum/)
     3. Drop MP3 files into that subfolder
     4. Update the "albums" object below:
        - Add a new key with title, type, art path, and tracks array
@@ -303,8 +303,8 @@
     6. git add, commit, push — done
 
     FILE NAMING:
-    - Album art: img/albumname.png or .jpg
-    - Audio: music/albumname/01-Track-Name.mp3
+    - Album art: Art/albumname.png or .jpg
+    - Audio: Songs/AlbumName/01 - Track Name.mp3
       (you can name files however you want, just match the "file" path)
     ════════════════════════════════════════════════════════
   -->
@@ -313,36 +313,36 @@
       novafide: {
         title: "NovaFide",
         type: "Single · 2026",
-        art: "img/novafide.png",
+        art: "Art/novafide.png",
         tracks: [
-          { num: 1, name: "NovaFide", file: "music/novafide/NovaFide.mp3" }
+          { num: 1, name: "NovaFide", file: "Songs/NovaFide/NovaFide.mp3" }
         ]
       },
       ashes: {
         title: "Ashes of Ascension",
         type: "Full Album · 2026",
-        art: "img/ashes.jpg",
+        art: "Art/ashes.png",
         tracks: [
-          { num: 1,  name: "Veil of Dawn",                          file: "music/ashes/01-Veil-of-Dawn.mp3" },
-          { num: 2,  name: "Ashen Bloom",                           file: "music/ashes/02-Ashen-Bloom.mp3" },
-          { num: 3,  name: "Crimson Horizon",                       file: "music/ashes/03-Crimson-Horizon.mp3" },
-          { num: 4,  name: "Tempest Crown",                         file: "music/ashes/04-Tempest-Crown.mp3" },
-          { num: 5,  name: "Ashen Sanctum",                         file: "music/ashes/05-Ashen-Sanctum.mp3" },
-          { num: 6,  name: "Rekindled Oath",                        file: "music/ashes/06-Rekindled-Oath.mp3" },
-          { num: 7,  name: "Ascendant Flame",                       file: "music/ashes/07-Ascendant-Flame.mp3" },
-          { num: 8,  name: "Sovereign of Ruin",                     file: "music/ashes/08-Sovereign-of-Ruin.mp3" },
-          { num: 9,  name: "Fall of the Ascendant",                 file: "music/ashes/09-Fall-of-the-Ascendant.mp3" },
-          { num: 10, name: "Abysswalker",                           file: "music/ashes/10-Abysswalker.mp3" },
-          { num: 11, name: "Reforged Ascendant",                    file: "music/ashes/11-Reforged-Ascendant.mp3" },
-          { num: 12, name: "Ascension Eternal I: The Reckoning",    file: "music/ashes/12-Ascension-Eternal-I-The-Reckoning.mp3" },
-          { num: 13, name: "Ascension Eternal II: The Final Dawn",  file: "music/ashes/13-Ascension-Eternal-II-The-Final-Dawn.mp3" },
-          { num: 14, name: "Embers of Eternity",                    file: "music/ashes/14-Embers-of-Eternity.mp3" }
+          { num: 1,  name: "Veil of Dawn",                          file: "Songs/Ashes/01 - Veil of Dawn.mp3" },
+          { num: 2,  name: "Ashen Bloom",                           file: "Songs/Ashes/02 - Ashen Bloom.mp3" },
+          { num: 3,  name: "Crimson Horizon",                       file: "Songs/Ashes/03 - Crimson Horizon.mp3" },
+          { num: 4,  name: "Tempest Crown",                         file: "Songs/Ashes/04 - Tempest Crown.mp3" },
+          { num: 5,  name: "Ashen Sanctum",                         file: "Songs/Ashes/05 - Ashen Sanctum.mp3" },
+          { num: 6,  name: "Rekindled Oath",                        file: "Songs/Ashes/06 - Rekindled Oath.mp3" },
+          { num: 7,  name: "Ascendant Flame",                       file: "Songs/Ashes/07 - Ascendant Flame.mp3" },
+          { num: 8,  name: "Sovereign of Ruin",                     file: "Songs/Ashes/08 - Sovereign of Ruin.mp3" },
+          { num: 9,  name: "Fall of the Ascendant",                 file: "Songs/Ashes/09 - Fall of the Ascendant.mp3" },
+          { num: 10, name: "Abysswalker",                           file: "Songs/Ashes/10 - Abysswalker.mp3" },
+          { num: 11, name: "Reforged Ascendant",                    file: "Songs/Ashes/11 - Reforged Ascendant.mp3" },
+          { num: 12, name: "Ascension Eternal I: The Reckoning",    file: "Songs/Ashes/12 - Ascension Eternal I The Reckoning.mp3" },
+          { num: 13, name: "Ascension Eternal II: The Final Dawn",  file: "Songs/Ashes/13 - Ascension Eternal II The Final Dawn.mp3" },
+          { num: 14, name: "Embers of Eternity",                    file: "Songs/Ashes/14 - Embers of Eternity.mp3" }
         ]
       },
       eoe: {
         title: "The End of Everything",
         type: "Coming Soon",
-        art: "img/eoe.png",
+        art: "Art/eoe.png",
         tracks: []
       }
     };
