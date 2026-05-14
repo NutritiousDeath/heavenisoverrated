@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heaven is Overrated — Instrumental Symphonic Metal</title>
-  <meta name="description" content="Heaven is Overrated — Instrumental Symphonic Metal. Enter. Remember. Ascend.">
+  <title>Music — Heaven is Overrated</title>
+  <meta name="description" content="Explore the full discography of Heaven is Overrated. Instrumental symphonic metal.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,55 +13,29 @@
 </head>
 <body>
 
-  <nav class="nav" id="nav">
-    <a href="index.html" class="active">Home</a>
-    <a href="music.html">Music</a>
+  <nav class="nav scrolled" id="nav">
+    <a href="index.html">Home</a>
+    <a href="music.html" class="active">Music</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg" style="background-image: url('Art/compass.jpg');"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">Heaven is<br>Overrated</h1>
-      <p class="hero-subtitle">Instrumental Symphonic Metal</p>
-      <p class="hero-tagline">Enter. Remember. Ascend.</p>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-bg" style="background-image: url('Art/compass.jpg');"></div>
+    <div class="page-header-content">
+      <div class="section-title">Discography</div>
+      <div class="section-label">All Releases</div>
     </div>
-    <div class="scroll-indicator">
-      <span>Descend</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+  </div>
 
-  <!-- FEATURED RELEASE -->
-  <section class="section" style="background: radial-gradient(ellipse at 50% 0%, rgba(42,26,58,0.15) 0%, transparent 60%), var(--black);">
-    <div class="section-inner">
-      <div class="section-title reveal">Latest Release</div>
-      <div class="section-label reveal">NovaFide · 2026</div>
-
-      <div class="reveal" style="display: flex; align-items: center; gap: 40px; max-width: 700px; margin: 0 auto;">
-        <a href="music/novafide.html" style="flex-shrink: 0;">
-          <img src="Art/novafide.png" alt="NovaFide" style="width: 220px; height: 220px; object-fit: cover; border: 1px solid rgba(107,90,62,0.2); box-shadow: 0 0 40px rgba(0,0,0,0.5); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-        </a>
-        <div>
-          <div style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-light); letter-spacing: 3px; margin-bottom: 8px;">NovaFide</div>
-          <div style="font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--purple-light); margin-bottom: 20px;">Single · 2026</div>
-          <p style="font-size: 1.05rem; line-height: 1.8; opacity: 0.7; margin-bottom: 24px;">The newest chapter. A single forged in fire.</p>
-          <a href="music/novafide.html" class="action-btn primary">Listen Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"><div class="divider-diamond"></div></div>
-
-  <!-- DISCOGRAPHY PREVIEW -->
+  <!-- ALBUM GRID -->
   <section class="section">
-    <div class="section-inner">
-      <div class="section-title reveal">Discography</div>
-      <div class="section-label reveal">Explore All Releases</div>
-      <div class="album-grid reveal">
+    <div class="section-inner" style="max-width: 1000px;">
+
+      <div class="album-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+
+        <!-- NovaFide (newest) -->
         <a href="music/novafide.html" class="album-card">
           <img src="Art/novafide.png" alt="NovaFide" class="album-card-art">
           <div class="album-card-info">
@@ -69,6 +43,8 @@
             <div class="album-card-meta">Single · 2026</div>
           </div>
         </a>
+
+        <!-- Ashes of Ascension -->
         <a href="music/ashes.html" class="album-card">
           <img src="Art/ashes.png" alt="Ashes of Ascension" class="album-card-art">
           <div class="album-card-info">
@@ -76,6 +52,8 @@
             <div class="album-card-meta">Full Album · 14 Tracks · 2026</div>
           </div>
         </a>
+
+        <!-- Symphony of Sparks -->
         <a href="music/sparks.html" class="album-card">
           <img src="Art/Sparks.png" alt="Symphony of Sparks" class="album-card-art">
           <div class="album-card-info">
@@ -83,9 +61,16 @@
             <div class="album-card-meta">2 Tracks · 2026</div>
           </div>
         </a>
-      </div>
-      <div style="text-align: center; margin-top: 40px;" class="reveal">
-        <a href="music.html" class="action-btn">View All Music</a>
+
+        <!-- The End of Everything (Coming Soon) -->
+        <div class="album-card coming-soon">
+          <img src="Art/eoe.png" alt="The End of Everything" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">The End of Everything</div>
+            <div class="album-card-meta">Coming Soon</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -95,8 +80,8 @@
   <!-- STREAMING -->
   <section class="section">
     <div class="section-inner">
-      <div class="section-title reveal">Follow</div>
-      <div class="section-label reveal">Stream Everywhere</div>
+      <div class="section-title reveal">Stream Everywhere</div>
+      <div class="section-label reveal">Follow</div>
       <div class="action-row reveal">
         <a href="https://open.spotify.com/artist/3CElMQrmVL4bXO52aQG09V" target="_blank" rel="noopener" class="action-btn">
           <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
