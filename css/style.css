@@ -11,9 +11,9 @@
   --gold-light: #d4bf8a;
   --purple-dark: #2a1a3a;
   --purple-glow: #8b5fcf;
-  --purple-light: #b088d4;
-  --cream: #d4cfc2;
-  --grey: #6b6560;
+  --purple-light: #c4a0e8;
+  --cream: #e2ded4;
+  --grey: #8a847e;
   --font-display: 'Cinzel Decorative', serif;
   --font-heading: 'Cinzel', serif;
   --font-body: 'Cormorant Garamond', serif;
@@ -145,7 +145,7 @@ body::before {
 .cp-info { flex: 1; }
 .cp-album-title { font-family: var(--font-display); font-size: 1.4rem; color: var(--gold-light); letter-spacing: 3px; margin-bottom: 4px; }
 .cp-album-type { font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--purple-light); margin-bottom: 16px; }
-.cp-now-playing { font-size: 1rem; color: var(--cream); opacity: 0.7; font-style: italic; }
+.cp-now-playing { font-size: 1rem; color: var(--cream); opacity: 0.85; font-style: italic; }
 .cp-now-playing span { color: var(--gold); opacity: 1; font-style: normal; }
 
 .cp-controls { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 8px 24px 4px; }
@@ -171,7 +171,7 @@ body::before {
 .cp-track.active { background: rgba(107,90,62,0.1); }
 .cp-track-num { font-family: var(--font-heading); font-size: 0.6rem; color: var(--grey); width: 24px; text-align: right; letter-spacing: 1px; }
 .cp-track.active .cp-track-num { color: var(--gold); }
-.cp-track-name { flex: 1; font-size: 0.95rem; color: var(--cream); opacity: 0.7; }
+.cp-track-name { flex: 1; font-size: 0.95rem; color: var(--cream); opacity: 0.85; }
 .cp-track.active .cp-track-name { color: var(--gold-light); opacity: 1; }
 .cp-track-dur { font-family: var(--font-heading); font-size: 0.55rem; letter-spacing: 2px; color: var(--grey); }
 
@@ -220,7 +220,7 @@ body::before {
 .about-section { position: relative; overflow: hidden; }
 .about-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.06; filter: blur(2px); }
 .about-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; text-align: center; }
-.about-text { font-size: 1.15rem; font-weight: 300; line-height: 2; color: var(--cream); opacity: 0.85; }
+.about-text { font-size: 1.15rem; font-weight: 300; line-height: 2; color: var(--cream); opacity: 0.95; }
 .about-text em { color: var(--gold); font-style: italic; }
 
 /* ── CONTACT ── */
