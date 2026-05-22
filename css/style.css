@@ -246,20 +246,129 @@ body::before {
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════════════
+   HAMBURGER MENU (hidden on desktop)
+   ══════════════════════════════════════════ */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 2px;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--gold);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; }
+.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+.nav-links { display: contents; }
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,15,0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nav-overlay.visible { opacity: 1; }
+
+/* ── RESPONSIVE — TABLET ── */
 @media (max-width: 768px) {
   .nav { gap: 20px; padding: 16px 20px; }
   .nav a { font-size: 0.6rem; letter-spacing: 2px; }
+  .hero-title { letter-spacing: 4px; }
+
+  /* Player header stacks */
   .cp-header { flex-direction: column; text-align: center; }
   .cp-art { width: 200px; height: 200px; }
+
+  /* Make player controls & progress bar easier to tap */
+  .cp-btn { width: 44px; height: 44px; }
+  .cp-btn.play { width: 56px; height: 56px; }
+  .cp-bar-bg { height: 6px; }
+  .cp-bar-fill::after { width: 14px; height: 14px; top: -4px; right: -7px; }
+  .cp-track { padding: 14px 20px; min-height: 48px; }
+
   .contact-links { gap: 24px; }
-  .hero-title { letter-spacing: 4px; }
 }
-@media (max-width: 480px) {
-  .nav { gap: 16px; flex-wrap: wrap; justify-content: center; }
-  .nav a { font-size: 0.55rem; letter-spacing: 2px; }
+
+/* ── RESPONSIVE — SMALL SCREENS ── */
+@media (max-width: 640px) {
+  /* Switch to hamburger nav */
+  .nav {
+    justify-content: space-between;
+    padding: 14px 20px;
+    gap: 0;
+    background: rgba(10,10,15,0.97);
+    backdrop-filter: blur(12px);
+  }
+  .nav.scrolled { padding: 14px 20px; }
+  .nav-hamburger { display: flex; }
+  .nav-links {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    background: rgba(10,10,15,0.98);
+    border-left: 1px solid rgba(107,90,62,0.1);
+    z-index: 1001;
+    transition: right 0.35s ease;
+  }
+  .nav-links.open { right: 0; }
+  .nav-links a {
+    font-size: 0.75rem !important;
+    letter-spacing: 4px !important;
+    padding: 8px 0;
+  }
+
+  /* Sections breathe */
   .section { padding: 70px 16px; }
-  .action-btn { flex: 1 1 auto; justify-content: center; }
+  .section-title { letter-spacing: 3px; }
+  .section-label { letter-spacing: 4px; margin-bottom: 35px; }
+  .page-header { padding: 120px 16px 50px; }
+
+  /* Album grid single column */
+  .album-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Action buttons stack */
+  .action-row { gap: 10px; }
+  .action-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 0.55rem;
+    min-height: 48px;
+  }
+
+  /* Player tweaks */
   .cp-art { width: 160px; height: 160px; }
-  .album-grid { grid-template-columns: 1fr; }
+  .cp-album-title { font-size: 1.1rem; letter-spacing: 2px; }
+  .cp-controls { gap: 16px; padding: 8px 16px 4px; }
+  .cp-progress { padding: 12px 16px 16px; }
+  .cp-track { padding: 14px 16px; gap: 12px; }
+
+  /* Footer */
+  .footer { padding: 40px 16px 30px; }
+  .footer-logo { font-size: 0.8rem; letter-spacing: 3px; }
 }

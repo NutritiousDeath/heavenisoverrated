@@ -228,11 +228,17 @@
   </div>
 
   <!-- ═══ SITE CONTENT ═══ -->
+  <div class="nav-overlay" id="navOverlay"></div>
   <nav class="nav" id="nav">
-    <a href="index.html" class="active">Home</a>
-    <a href="music.html">Music</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="music.html">Music</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </nav>
 
   <section class="hero" id="home">
@@ -252,11 +258,11 @@
     <div class="section-inner">
       <div class="section-title reveal">Latest Release</div>
       <div class="section-label reveal">NovaFide · 2026</div>
-      <div class="reveal" style="display: flex; align-items: center; gap: 40px; max-width: 700px; margin: 0 auto;">
+      <div class="reveal" style="display: flex; align-items: center; gap: 40px; max-width: 700px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
         <a href="music/novafide.html" style="flex-shrink: 0;">
           <img src="Art/novafide.png" alt="NovaFide" style="width: 220px; height: 220px; object-fit: cover; border: 1px solid rgba(107,90,62,0.2); box-shadow: 0 0 40px rgba(0,0,0,0.5); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
         </a>
-        <div>
+        <div style="flex: 1; min-width: 200px; text-align: center;">
           <div style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-light); letter-spacing: 3px; margin-bottom: 8px;">NovaFide</div>
           <div style="font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--purple-light); margin-bottom: 20px;">Single · 2026</div>
           <p style="font-size: 1.05rem; line-height: 1.8; opacity: 0.85; margin-bottom: 24px;">The latest single. Hit play.</p>
@@ -469,6 +475,25 @@
       entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
     }, { threshold: 0.15 });
     reveals.forEach(function(el) { observer.observe(el); });
+
+    /* Hamburger menu */
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
   </script>
 
 </body>
