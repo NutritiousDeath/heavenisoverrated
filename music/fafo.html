@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F.A.F.O. — Heaven is Overrated</title>
+  <meta name="description" content="F.A.F.O. (Fuck Around. Find Out.) — Single by Heaven is Overrated feat. Pills on the Parmesian. Cinematic Symphonic Extreme Metal. 2026.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── FAFO PAGE OVERRIDES ── */
+    body {
+      background: #05050a;
+    }
+
+    .fafo-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 120px 20px 80px;
+    }
+
+    .fafo-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('../Art/FAFO.png');
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.18) blur(3px);
+    }
+
+    .fafo-hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 50% 30%, rgba(139,95,207,0.12) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(5,5,10,0.3) 0%, rgba(5,5,10,0.7) 60%, #05050a 100%);
+    }
+
+    /* Purple lightning scan lines */
+    .fafo-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(139,95,207,0.015) 3px,
+        rgba(139,95,207,0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .fafo-hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .fafo-cover {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border: 1px solid rgba(139,95,207,0.3);
+      box-shadow: 
+        0 0 80px rgba(139,95,207,0.25),
+        0 0 30px rgba(139,95,207,0.1),
+        0 20px 60px rgba(0,0,0,0.8);
+      margin-bottom: 40px;
+      animation: fadeUp 1.2s ease-out both;
+    }
+
+    .fafo-tag {
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      margin-bottom: 16px;
+      animation: fadeUp 1.2s ease-out 0.15s both;
+    }
+
+    .fafo-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: 10px;
+      color: #fff;
+      text-shadow: 
+        0 0 40px rgba(139,95,207,0.6),
+        0 0 80px rgba(139,95,207,0.3);
+      margin-bottom: 8px;
+      animation: fadeUp 1.2s ease-out 0.25s both;
+    }
+
+    .fafo-subtitle {
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      opacity: 0.8;
+      margin-bottom: 6px;
+      animation: fadeUp 1.2s ease-out 0.35s both;
+    }
+
+    .fafo-feat {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--grey);
+      letter-spacing: 2px;
+      margin-bottom: 50px;
+      animation: fadeUp 1.2s ease-out 0.45s both;
+    }
+
+    .fafo-feat span {
+      color: var(--purple-light);
+    }
+
+    /* ── FAFO PLAYER ── */
+    .fafo-player {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(10,8,18,0.9);
+      border: 1px solid rgba(139,95,207,0.2);
+      box-shadow: 
+        0 0 60px rgba(139,95,207,0.08),
+        inset 0 1px 0 rgba(139,95,207,0.1);
+      padding: 36px 40px;
+      animation: fadeUp 1.2s ease-out 0.55s both;
+    }
+
+    .fafo-player-label {
+      font-family: var(--font-heading);
+      font-size: 0.55rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--purple-glow);
+      text-align: center;
+      margin-bottom: 28px;
+      opacity: 0.7;
+    }
+
+    .fafo-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .fafo-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--grey);
+      transition: color 0.3s, transform 0.2s;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fafo-btn:hover { color: var(--purple-light); transform: scale(1.1); }
+    .fafo-btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+    .fafo-btn.play {
+      width: 60px;
+      height: 60px;
+      border: 1px solid rgba(139,95,207,0.4);
+      background: rgba(139,95,207,0.08);
+      color: var(--purple-light);
+      transition: all 0.3s;
+    }
+    .fafo-btn.play:hover {
+      background: rgba(139,95,207,0.2);
+      border-color: var(--purple-glow);
+      box-shadow: 0 0 20px rgba(139,95,207,0.3);
+      transform: scale(1.05);
+    }
+    .fafo-btn.play svg { width: 26px; height: 26px; }
+
+    .fafo-progress {
+      margin-bottom: 10px;
+    }
+
+    .fafo-bar-bg {
+      width: 100%;
+      height: 2px;
+      background: rgba(139,95,207,0.15);
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .fafo-bar-bg:hover .fafo-bar-fill { box-shadow: 0 0 8px rgba(139,95,207,0.8); }
+
+    .fafo-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--purple-glow), var(--purple-light));
+      transition: width 0.1s linear;
+      box-shadow: 0 0 6px rgba(139,95,207,0.5);
+    }
+
+    .fafo-times {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      color: var(--grey);
+    }
+
+    .fafo-track-name {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    /* ── STREAM BUTTONS ── */
+    .fafo-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 40px;
+      animation: fadeUp 1.2s ease-out 0.65s both;
+    }
+
+    .fafo-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(139,95,207,0.3);
+      color: var(--purple-light);
+      background: rgba(139,95,207,0.05);
+      transition: all 0.3s ease;
+    }
+    .fafo-action-btn:hover {
+      background: rgba(139,95,207,0.15);
+      border-color: var(--purple-glow);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(139,95,207,0.2);
+    }
+    .fafo-action-btn.primary {
+      border-color: rgba(139,95,207,0.5);
+      background: rgba(139,95,207,0.1);
+    }
+    .fafo-action-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── BACK LINK ── */
+    .fafo-back {
+      margin-top: 50px;
+      text-align: center;
+      animation: fadeUp 1.2s ease-out 0.75s both;
+    }
+    .fafo-back a {
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--grey);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .fafo-back a:hover { color: var(--purple-light); }
+
+    /* ── PULSE CORNERS ── */
+    .fafo-player::before,
+    .fafo-player::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: var(--purple-glow);
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .fafo-player { position: relative; }
+    .fafo-player::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+    .fafo-player::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .fafo-cover { width: 220px; height: 220px; }
+      .fafo-player { padding: 28px 24px; }
+      .fafo-action-btn { padding: 12px 20px; font-size: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a>
+      <a href="../music.html" class="active">Music</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="fafo-hero">
+    <div class="fafo-hero-bg"></div>
+    <div class="fafo-hero-content">
+
+      <img src="../Art/FAFO.png" alt="F.A.F.O." class="fafo-cover">
+
+      <div class="fafo-tag">Heaven is Overrated</div>
+      <div class="fafo-title">F.A.F.O.</div>
+      <div class="fafo-subtitle">Single · 2026</div>
+      <div class="fafo-feat">feat. <span>Pills on the Parmesian</span></div>
+
+      <div class="fafo-player" id="player">
+        <div class="fafo-player-label">— Now Transmitting —</div>
+        <div class="fafo-track-name" id="playerTrackName">F.A.F.O.</div>
+        <div class="fafo-controls">
+          <button class="fafo-btn play" id="playBtn" title="Play">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <div class="fafo-progress">
+          <div class="fafo-bar-bg" id="progressBar"><div class="fafo-bar-fill" id="progressFill"></div></div>
+          <div class="fafo-times"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
+        </div>
+      </div>
+
+      <div class="fafo-actions">
+        <a href="https://www.amazon.com/music/player/albums/B0H59KMDFD" target="_blank" rel="noopener" class="fafo-action-btn primary">
+          <svg viewBox="0 0 24 24"><path d="M18.12 20.17c-.36.27-.88.06-.67-.38.9-1.94.3-2.86-.63-3.36-.07-.04-.14-.03-.2.02-2.34 2.21-6.78 3.1-10.14 2.17-.22-.06-.4.15-.25.33 1.62 1.87 5.16 2.61 7.77 1.83 1.42-.42 2.94-1.1 3.68-1.76.22-.2.58-.96.44.15zm1.1-1.27c-.28-.36-1.86-.17-2.57-.09-.22.03-.25-.16-.06-.3 1.26-.88 3.32-.63 3.56-.33.24.3-.07 2.36-1.24 3.35-.18.15-.35.07-.27-.13.26-.65.85-2.14.58-2.5z"/><path d="M14.68 13.35c0-1.7.01-3.12-.82-4.62-.62-1.14-1.62-1.84-2.72-1.84-1.51 0-2.4.93-2.4 2.29 0 2.7 2.78 3.19 5.94 3.19v1c0 0 .01 2.47-2.68 2.47-1.02 0-1.78-.29-1.78-.29l-.35 1.54s.96.49 2.53.49c2.12 0 4.28-.88 4.28-4.23zm-3.15-2.3c-1.12 0-2.79-.23-2.79-1.64 0-.96.65-1.47 1.45-1.47 1.13 0 1.87.87 1.87 2.1v1h-.53z"/></svg>
+          Buy on Amazon
+        </a>
+        <a href="https://open.spotify.com/track/2DDa5zFfIN83extLaFbcIS?si=665a45e994384ee5" target="_blank" rel="noopener" class="fafo-action-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Stream on Spotify
+        </a>
+      </div>
+
+      <div class="fafo-back">
+        <a href="../music.html">&larr; Back to Discography</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="compass">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.5" color="#6b5a3e">
+        <circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/>
+        <line x1="20" y1="2" x2="20" y2="38"/><line x1="2" y1="20" x2="38" y2="20"/>
+        <line x1="8" y1="8" x2="32" y2="32" stroke-dasharray="2 3"/><line x1="32" y1="8" x2="8" y2="32" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <div class="footer-logo">Heaven is Overrated</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+  </footer>
+
+  <script>
+    var audio = new Audio('../Songs/FAFO/01 - FAFO.mp3');
+    var isPlaying = false;
+    var playBtn = document.getElementById('playBtn');
+    var playIcon = document.getElementById('playIcon');
+    var pauseIcon = document.getElementById('pauseIcon');
+    var progressBar = document.getElementById('progressBar');
+    var progressFill = document.getElementById('progressFill');
+    var currentTimeEl = document.getElementById('currentTime');
+    var totalTimeEl = document.getElementById('totalTime');
+
+    function formatTime(s) { if (isNaN(s)) return '0:00'; var m = Math.floor(s/60); var sec = Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+
+    function playTrack() { audio.play().then(function(){ isPlaying=true; playIcon.style.display='none'; pauseIcon.style.display='block'; }).catch(function(){}); }
+    function pauseTrack() { audio.pause(); isPlaying=false; playIcon.style.display='block'; pauseIcon.style.display='none'; }
+
+    playBtn.addEventListener('click', function(){ if(isPlaying) pauseTrack(); else playTrack(); });
+
+    audio.addEventListener('timeupdate', function(){ if(audio.duration){ progressFill.style.width=(audio.currentTime/audio.duration*100)+'%'; currentTimeEl.textContent=formatTime(audio.currentTime); } });
+    audio.addEventListener('loadedmetadata', function(){ totalTimeEl.textContent=formatTime(audio.duration); });
+    audio.addEventListener('ended', function(){ pauseTrack(); audio.currentTime=0; });
+    progressBar.addEventListener('click', function(e){ if(audio.duration){ var r=progressBar.getBoundingClientRect(); audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration; } });
+
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY>80); });
+
+    /* Hamburger menu */
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>
