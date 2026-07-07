@@ -577,12 +577,12 @@
           seam.style.opacity = '0';
           overlay.classList.add('gates-open');
           document.body.classList.remove('loading');
+          showSplash();
         }, 400);
 
         setTimeout(function() {
           overlay.classList.add('done');
           sessionStorage.setItem('hisor_intro_seen', '1');
-          showSplash();
         }, 2000);
       }, 4600);
     })();
