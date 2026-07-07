@@ -190,6 +190,86 @@
       .intro-title { letter-spacing: 3px; }
       .intro-tagline { letter-spacing: 4px; font-size: 0.55rem; }
     }
+
+    /* ═══ SPLASH CHOICE SCREEN ═══ */
+    .splash-choice {
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .splash-choice.visible { display: flex; opacity: 1; }
+    .splash-panel {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      overflow: hidden;
+      cursor: pointer;
+      transition: flex 0.5s ease;
+    }
+    .splash-panel:hover { flex: 1.15; }
+    .splash-panel-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease, filter 0.6s ease;
+      filter: brightness(0.4) saturate(1.1);
+    }
+    .splash-panel:hover .splash-panel-bg { transform: scale(1.06); filter: brightness(0.55) saturate(1.2); }
+    .splash-panel-hisor .splash-panel-bg { background-color: #0a0a0f; }
+    .splash-panel-pills .splash-panel-bg { background-color: #050308; }
+    .splash-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.65) 100%);
+    }
+    .splash-panel-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+    }
+    .splash-panel-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      letter-spacing: 3px;
+      color: #d4bf8a;
+      text-shadow: 0 0 25px rgba(184,157,106,0.4);
+      margin-bottom: 10px;
+    }
+    .splash-panel-pills .splash-panel-title {
+      font-family: 'Cinzel Decorative', serif;
+      color: #b565ff;
+      text-shadow: 0 0 25px rgba(139,47,214,0.5);
+    }
+    .splash-panel-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #8a847e;
+    }
+    .splash-seam {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(184,157,106,0.3), transparent);
+      z-index: 3;
+    }
+    @media (max-width: 640px) {
+      .splash-choice { flex-direction: column; }
+      .splash-seam { width: 100%; height: 1px; top: 50%; left: 0; transform: translateY(-50%); }
+    }
   </style>
 </head>
 <body class="loading">
@@ -227,6 +307,25 @@
     </div>
   </div>
 
+  <!-- ═══ SPLASH CHOICE SCREEN ═══ -->
+  <div class="splash-choice" id="splashChoice">
+    <div class="splash-seam"></div>
+    <a href="#" class="splash-panel splash-panel-hisor" id="choiceHisor">
+      <div class="splash-panel-bg" style="background-image: url('Art/compass.jpg');"></div>
+      <div class="splash-panel-content">
+        <div class="splash-panel-title">Heaven is Overrated</div>
+        <div class="splash-panel-sub">Instrumental Symphonic Metal</div>
+      </div>
+    </a>
+    <a href="pills/index.html" class="splash-panel splash-panel-pills" id="choicePills">
+      <div class="splash-panel-bg" style="background-image: url('pills/art/aura-hero.png');"></div>
+      <div class="splash-panel-content">
+        <div class="splash-panel-title">Pills on the Parmesian</div>
+        <div class="splash-panel-sub">The Signal That Survives</div>
+      </div>
+    </a>
+  </div>
+
   <!-- ═══ SITE CONTENT ═══ -->
   <div class="nav-overlay" id="navOverlay"></div>
   <nav class="nav" id="nav">
@@ -237,6 +336,7 @@
       <a href="index.html" class="active">Home</a>
       <a href="music.html">Music</a>
       <a href="videos.html">Videos</a>
+      <a href="pills/index.html">Pills on the Parmesian</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
@@ -342,10 +442,28 @@
   <script>
     /* ═══ CINEMATIC INTRO SEQUENCE ═══ */
     (function() {
-      // Only show intro once per session
-      if (sessionStorage.getItem('hisor_intro_seen')) {
-        document.getElementById('introOverlay').classList.add('done');
+      var splashChoice = document.getElementById('splashChoice');
+      var introOverlay = document.getElementById('introOverlay');
+
+      function showSplash() {
+        splashChoice.classList.add('visible');
+      }
+
+      var siteChosen = sessionStorage.getItem('hisor_site_choice');
+      var introSeen = sessionStorage.getItem('hisor_intro_seen');
+
+      // Already chose Heaven is Overrated this session — skip straight to site
+      if (siteChosen) {
+        introOverlay.classList.add('done');
         document.body.classList.remove('loading');
+        return;
+      }
+
+      // Seen the gate animation before, but hasn't chosen yet — skip gate, show splash immediately
+      if (introSeen) {
+        introOverlay.classList.add('done');
+        document.body.classList.remove('loading');
+        showSplash();
         return;
       }
 
@@ -464,6 +582,7 @@
         setTimeout(function() {
           overlay.classList.add('done');
           sessionStorage.setItem('hisor_intro_seen', '1');
+          showSplash();
         }, 2000);
       }, 4600);
     })();
@@ -476,6 +595,14 @@
       entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
     }, { threshold: 0.15 });
     reveals.forEach(function(el) { observer.observe(el); });
+
+    /* ═══ SPLASH CHOICE HANDLERS ═══ */
+    document.getElementById('choiceHisor').addEventListener('click', function(e) {
+      e.preventDefault();
+      sessionStorage.setItem('hisor_site_choice', '1');
+      document.getElementById('splashChoice').classList.remove('visible');
+    });
+    /* Pills panel uses a normal href — no JS needed, navigates directly to pills/index.html */
 
     /* Hamburger menu */
     var hamburger = document.getElementById('navHamburger');
