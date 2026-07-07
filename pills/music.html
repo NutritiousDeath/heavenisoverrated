@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music — Pills on the Parmesian</title>
+  <meta name="description" content="Discography — Pills on the Parmesian.">
+  <meta name="theme-color" content="#050308">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/pills.css">
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="music.html" class="active">Music</a>
+      <a href="videos.html">Videos</a>
+      <a href="about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-bg" style="background-image: url('art/bg-texture.png');"></div>
+    <div class="page-header-content">
+      <div class="section-title">Discography</div>
+      <div class="section-label">All Releases</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-inner" style="max-width: 1000px;">
+      <div class="album-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+
+        <a href="darkerside.html" class="album-card">
+          <img src="Songs/DarkerSideOfLife/darkersideoflife.png" alt="The Darker Side of Life" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">The Darker Side of Life</div>
+            <div class="album-card-meta">Full Album · Streaming Now</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="signal-divider">
+    <svg viewBox="0 0 240 20"><path d="M0,10 L40,10 L48,2 L56,18 L64,10 L100,10 L108,4 L116,16 L124,10 L160,10 L168,2 L176,18 L184,10 L240,10"/></svg>
+  </div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-title reveal">Stream Everywhere</div>
+      <div class="section-label reveal">Follow</div>
+      <div class="action-row reveal">
+        <a href="#" class="action-btn">Spotify</a>
+        <a href="#" class="action-btn">Apple Music</a>
+        <a href="#" class="action-btn">Amazon Music</a>
+      </div>
+      <p style="text-align:center; font-size:0.8rem; color:var(--grey); margin-top:20px;">Streaming links coming soon</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-logo">Pills on the Parmesian</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+    <div class="footer-crosslink"><a href="../index.html">&larr; Heaven is Overrated</a></div>
+  </footer>
+
+  <script>
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 80); });
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>

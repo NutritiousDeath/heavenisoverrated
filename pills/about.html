@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Pills on the Parmesian</title>
+  <meta name="description" content="The story behind Pills on the Parmesian.">
+  <meta name="theme-color" content="#050308">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/pills.css">
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="music.html">Music</a>
+      <a href="videos.html">Videos</a>
+      <a href="about.html" class="active">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-bg" style="background-image: url('art/aura-hero.png');"></div>
+    <div class="page-header-content">
+      <div class="section-title">About</div>
+      <div class="section-label">The Signal</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="bio-block reveal">
+
+        <p>Every city has a frequency underneath it — the one nobody's supposed to hear. <strong>Pills on the Parmesian</strong> is that frequency. Ethereal vocals, purple lightning, a signal that keeps transmitting long after everything else has gone quiet.</p>
+
+        <div class="bio-highlight">The Sound</div>
+
+        <p>Where <em>Heaven is Overrated</em> speaks entirely through instruments, Pills on the Parmesian is voice-first — vocals run through layers of processing until they stop sounding human and start sounding like something broadcasting from somewhere else.</p>
+
+        <div class="bio-highlight">The Darker Side of Life</div>
+
+        <p>The debut full album, <strong>The Darker Side of Life</strong>, is streaming now. It's the first transmission — the one that started before any of the crossover projects existed.</p>
+
+        <p style="text-align: center; opacity: 0.65; margin-top: 40px;">The signal survives.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-logo">Pills on the Parmesian</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+    <div class="footer-crosslink"><a href="../index.html">&larr; Heaven is Overrated</a></div>
+  </footer>
+
+  <script>
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 80); });
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>
