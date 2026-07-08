@@ -272,13 +272,14 @@ body::after {
 .signal-glitch {
   position: relative;
   display: inline-block;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 4px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--text);
-  padding: 4px 0;
+  padding: 8px 4px;
+  text-shadow: 0 0 12px rgba(139,47,214,0.4);
 }
 .signal-glitch::before,
 .signal-glitch::after {
@@ -289,48 +290,72 @@ body::after {
   overflow: hidden;
 }
 .signal-glitch::before {
-  left: 2px;
-  text-shadow: -1px 0 var(--magenta);
-  clip-path: inset(0 0 0 0);
-  animation: glitchSliceA 4s infinite linear;
+  left: 4px;
+  text-shadow: -2px 0 var(--magenta);
+  clip-path: inset(0 0 100% 0);
+  animation: glitchSliceA 2.2s infinite steps(1);
 }
 .signal-glitch::after {
-  left: -2px;
-  text-shadow: -1px 0 var(--cyan);
-  clip-path: inset(0 0 0 0);
-  animation: glitchSliceB 4.5s infinite linear;
+  left: -4px;
+  text-shadow: 2px 0 var(--cyan);
+  clip-path: inset(0 0 100% 0);
+  animation: glitchSliceB 2.2s infinite steps(1);
 }
 @keyframes glitchSliceA {
-  0%, 92%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
-  93% { clip-path: inset(10% 0 60% 0); opacity: 1; transform: translateX(-2px); }
-  94% { clip-path: inset(70% 0 5% 0); opacity: 1; transform: translateX(2px); }
-  95% { clip-path: inset(30% 0 40% 0); opacity: 1; transform: translateX(-1px); }
-  96%, 99% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  0%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
+  2% { clip-path: inset(10% 0 55% 0); opacity: 1; transform: translateX(-5px); }
+  4% { clip-path: inset(65% 0 5% 0); opacity: 1; transform: translateX(6px); }
+  6% { clip-path: inset(25% 0 45% 0); opacity: 1; transform: translateX(-4px); }
+  8% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  46% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  48% { clip-path: inset(40% 0 20% 0); opacity: 1; transform: translateX(5px); }
+  50% { clip-path: inset(5% 0 70% 0); opacity: 1; transform: translateX(-6px); }
+  52% { clip-path: inset(0 0 100% 0); opacity: 0; }
 }
 @keyframes glitchSliceB {
-  0%, 90%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
-  91% { clip-path: inset(50% 0 20% 0); opacity: 1; transform: translateX(2px); }
-  92% { clip-path: inset(15% 0 65% 0); opacity: 1; transform: translateX(-2px); }
-  93% { clip-path: inset(60% 0 10% 0); opacity: 1; transform: translateX(1px); }
-  97%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  0%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
+  2% { clip-path: inset(50% 0 15% 0); opacity: 1; transform: translateX(6px); }
+  4% { clip-path: inset(15% 0 60% 0); opacity: 1; transform: translateX(-5px); }
+  6% { clip-path: inset(70% 0 8% 0); opacity: 1; transform: translateX(4px); }
+  8% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  46% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  48% { clip-path: inset(20% 0 50% 0); opacity: 1; transform: translateX(-5px); }
+  50% { clip-path: inset(60% 0 10% 0); opacity: 1; transform: translateX(6px); }
+  52% { clip-path: inset(0 0 100% 0); opacity: 0; }
 }
 .signal-glitch-static {
   position: relative;
+  animation: glitchShake 2.2s infinite steps(1);
 }
 .signal-glitch-static::after {
   content: '';
   position: absolute;
-  inset: -4px -8px;
+  inset: -10px -16px;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0;
   mix-blend-mode: overlay;
   pointer-events: none;
-  animation: staticFlicker 4s infinite steps(1);
+  animation: staticFlicker 2.2s infinite steps(1);
 }
 @keyframes staticFlicker {
-  0%, 90%, 100% { opacity: 0; }
-  91% { opacity: 0.5; }
-  93% { opacity: 0; }
-  95% { opacity: 0.35; }
-  96% { opacity: 0; }
+  0%, 100% { opacity: 0; }
+  2% { opacity: 0.8; }
+  4% { opacity: 0.3; }
+  6% { opacity: 0.7; }
+  8% { opacity: 0; }
+  46% { opacity: 0; }
+  48% { opacity: 0.6; }
+  50% { opacity: 0.85; }
+  52% { opacity: 0; }
+}
+@keyframes glitchShake {
+  0%, 100% { transform: translate(0,0); }
+  2% { transform: translate(-2px, 1px); }
+  4% { transform: translate(2px, -1px); }
+  6% { transform: translate(-1px, 0); }
+  8% { transform: translate(0,0); }
+  46% { transform: translate(0,0); }
+  48% { transform: translate(2px, -1px); }
+  50% { transform: translate(-2px, 1px); }
+  52% { transform: translate(0,0); }
 }
