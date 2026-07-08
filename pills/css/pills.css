@@ -111,17 +111,19 @@ body::after {
 .nav-overlay { position: fixed; inset: 0; background: rgba(5,3,8,0.92); z-index: 998; display: none; opacity: 0; transition: opacity 0.3s ease; }
 .nav-overlay.visible { opacity: 1; }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .nav-hamburger { display: flex; }
+  .nav { justify-content: space-between; }
   .nav-links {
     position: fixed; top: 0; right: -280px; width: 260px; height: 100vh;
     background: var(--void-2); flex-direction: column; align-items: flex-start;
     justify-content: center; gap: 32px; padding: 40px; z-index: 999;
     transition: right 0.4s cubic-bezier(0.76,0,0.24,1);
     border-left: 1px solid rgba(139,47,214,0.25);
+    flex-wrap: nowrap;
   }
   .nav-links.open { right: 0; }
-  .nav { justify-content: space-between; }
+  .nav-links a { font-size: 0.85rem; letter-spacing: 2px; }
 }
 
 /* ── SECTIONS ── */
@@ -264,4 +266,71 @@ body::after {
   .cp-bar-bg { height: 6px; }
   .cp-bar-fill::after { width: 14px; height: 14px; top: -4px; right: -7px; }
   .cp-track { padding: 14px 20px; min-height: 48px; }
+}
+
+/* ── GLITCH / STATIC TEXT EFFECT ── */
+.signal-glitch {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 4px 0;
+}
+.signal-glitch::before,
+.signal-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--void);
+  overflow: hidden;
+}
+.signal-glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--magenta);
+  clip-path: inset(0 0 0 0);
+  animation: glitchSliceA 4s infinite linear;
+}
+.signal-glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 var(--cyan);
+  clip-path: inset(0 0 0 0);
+  animation: glitchSliceB 4.5s infinite linear;
+}
+@keyframes glitchSliceA {
+  0%, 92%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  93% { clip-path: inset(10% 0 60% 0); opacity: 1; transform: translateX(-2px); }
+  94% { clip-path: inset(70% 0 5% 0); opacity: 1; transform: translateX(2px); }
+  95% { clip-path: inset(30% 0 40% 0); opacity: 1; transform: translateX(-1px); }
+  96%, 99% { clip-path: inset(0 0 100% 0); opacity: 0; }
+}
+@keyframes glitchSliceB {
+  0%, 90%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  91% { clip-path: inset(50% 0 20% 0); opacity: 1; transform: translateX(2px); }
+  92% { clip-path: inset(15% 0 65% 0); opacity: 1; transform: translateX(-2px); }
+  93% { clip-path: inset(60% 0 10% 0); opacity: 1; transform: translateX(1px); }
+  97%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
+}
+.signal-glitch-static {
+  position: relative;
+}
+.signal-glitch-static::after {
+  content: '';
+  position: absolute;
+  inset: -4px -8px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: staticFlicker 4s infinite steps(1);
+}
+@keyframes staticFlicker {
+  0%, 90%, 100% { opacity: 0; }
+  91% { opacity: 0.5; }
+  93% { opacity: 0; }
+  95% { opacity: 0.35; }
+  96% { opacity: 0; }
 }
