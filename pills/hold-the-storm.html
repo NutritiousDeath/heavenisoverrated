@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hold the Storm — Pills on the Parmesian</title>
+  <meta name="description" content="Hold the Storm — single from Pills on the Parmesian.">
+  <meta name="theme-color" content="#050308">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/pills.css">
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="music.html" class="active">Music</a>
+      <a href="videos.html">Videos</a>
+      <a href="about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../home.html">Heaven is Overrated</a>
+    </div>
+  </nav>
+
+  <div class="page-header" style="padding-bottom: 40px;">
+    <div class="page-header-bg" style="background-image: url('Songs/hold/Hold the Storm.png');"></div>
+    <div class="page-header-content">
+      <div class="section-title">Hold the Storm</div>
+      <div class="section-label">Single</div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 40px;">
+    <div class="section-inner">
+
+      <div class="custom-player reveal" id="player">
+        <div class="cp-header">
+          <div class="cp-art"><img id="playerArt" src="Songs/hold/Hold the Storm.png" alt="Hold the Storm"></div>
+          <div class="cp-info">
+            <div class="cp-album-title">Hold the Storm</div>
+            <div class="cp-album-type">Single</div>
+            <div class="cp-now-playing">Now playing: <span id="playerTrackName">Hold the Storm</span></div>
+          </div>
+        </div>
+        <div class="cp-controls">
+          <button class="cp-btn play" id="playBtn" title="Play">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <div class="cp-progress">
+          <div class="cp-bar-bg" id="progressBar"><div class="cp-bar-fill" id="progressFill"></div></div>
+          <div class="cp-times"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
+        </div>
+      </div>
+
+      <div class="action-row reveal" style="margin-top: 30px;">
+        <a href="#" class="action-btn primary">Spotify</a>
+        <a href="#" class="action-btn">Apple Music</a>
+        <a href="#" class="action-btn">Amazon Music</a>
+      </div>
+      <p style="text-align:center; font-size:0.8rem; color:var(--grey); margin-top:16px;" class="reveal">Streaming links coming soon</p>
+
+      <div style="text-align: center; margin-top: 40px;" class="reveal">
+        <a href="music.html" style="font-family: var(--font-heading); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--purple-glow)'" onmouseout="this.style.color='var(--grey)'">&larr; Back to Discography</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-logo">Pills on the Parmesian</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+    <div class="footer-crosslink"><a href="../home.html">&larr; Heaven is Overrated</a></div>
+  </footer>
+
+  <script>
+    var audio = new Audio('Songs/hold/Hold the Storm.mp3');
+    var isPlaying = false;
+    var playBtn = document.getElementById('playBtn');
+    var playIcon = document.getElementById('playIcon');
+    var pauseIcon = document.getElementById('pauseIcon');
+    var progressBar = document.getElementById('progressBar');
+    var progressFill = document.getElementById('progressFill');
+    var currentTimeEl = document.getElementById('currentTime');
+    var totalTimeEl = document.getElementById('totalTime');
+
+    function formatTime(s) { if (isNaN(s)) return '0:00'; var m = Math.floor(s/60); var sec = Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+
+    function playTrack() { audio.play().then(function(){ isPlaying=true; playIcon.style.display='none'; pauseIcon.style.display='block'; }).catch(function(){}); }
+    function pauseTrack() { audio.pause(); isPlaying=false; playIcon.style.display='block'; pauseIcon.style.display='none'; }
+
+    playBtn.addEventListener('click', function(){ if(isPlaying) pauseTrack(); else playTrack(); });
+
+    audio.addEventListener('timeupdate', function(){ if(audio.duration){ progressFill.style.width=(audio.currentTime/audio.duration*100)+'%'; currentTimeEl.textContent=formatTime(audio.currentTime); } });
+    audio.addEventListener('loadedmetadata', function(){ totalTimeEl.textContent=formatTime(audio.duration); });
+    audio.addEventListener('ended', function(){ pauseTrack(); audio.currentTime = 0; progressFill.style.width='0%'; currentTimeEl.textContent='0:00'; });
+    progressBar.addEventListener('click', function(e){ if(audio.duration){var r=progressBar.getBoundingClientRect(); audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;} });
+
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY>80); });
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){ entries.forEach(function(entry){ if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);} }); }, {threshold:0.15});
+    reveals.forEach(function(el){ observer.observe(el); });
+
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>
