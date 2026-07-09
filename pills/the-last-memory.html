@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last Memory — Pills on the Parmesian</title>
+  <meta name="description" content="The Last Memory — upcoming album from Pills on the Parmesian.">
+  <meta name="theme-color" content="#050308">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Chakra+Petch:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/pills.css">
+  <style>
+    .coming-soon-hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .coming-soon-art {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border: 1px solid rgba(139,47,214,0.25);
+      box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 30px rgba(139,47,214,0.15);
+      filter: brightness(0.75) saturate(0.9);
+      margin-bottom: 40px;
+      animation: fadeUp 1.5s ease-out;
+    }
+    .coming-soon-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 5px;
+      color: var(--text);
+      text-shadow: 0 0 20px rgba(139,47,214,0.4);
+      margin-bottom: 14px;
+      animation: fadeUp 1.5s ease-out 0.2s both;
+    }
+    .coming-soon-label {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      letter-spacing: 7px;
+      text-transform: uppercase;
+      color: var(--magenta);
+      margin-bottom: 40px;
+      animation: fadeUp 1.5s ease-out 0.4s both;
+    }
+    .coming-soon-text {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text);
+      opacity: 0.75;
+      max-width: 480px;
+      line-height: 1.8;
+      animation: fadeUp 1.5s ease-out 0.6s both;
+    }
+    .pulse-ring {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(139,47,214,0.1);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      animation: pulseRing 4s ease-in-out infinite;
+    }
+    .pulse-ring:nth-child(2) { width: 400px; height: 400px; animation-delay: 1s; }
+    .pulse-ring:nth-child(3) { width: 480px; height: 480px; animation-delay: 2s; }
+    @keyframes pulseRing {
+      0%, 100% { opacity: 0.35; transform: translate(-50%, -60%) scale(1); }
+      50% { opacity: 0.08; transform: translate(-50%, -60%) scale(1.05); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="music.html" class="active">Music</a>
+      <a href="videos.html">Videos</a>
+      <a href="about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../home.html">Heaven is Overrated</a>
+    </div>
+  </nav>
+
+  <div class="coming-soon-hero">
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <img src="Songs/Memory/The Last Memory.png" alt="The Last Memory" class="coming-soon-art">
+    <div class="coming-soon-title">The Last Memory</div>
+    <div class="coming-soon-label">Coming Soon</div>
+    <p class="coming-soon-text">Who am I? Something's coming. Follow to find out when the signal breaks through.</p>
+    <div class="action-row" style="margin-top: 30px; animation: fadeUp 1.5s ease-out 0.8s both;">
+      <a href="https://open.spotify.com/artist/7IhJ7O5P0g5elrLUP2YHiS?si=PZLO5FAPT8Cu5DOeZB-oLQ" target="_blank" rel="noopener" class="action-btn">Follow on Spotify</a>
+      <a href="https://music.apple.com/us/artist/pills-on-the-parmesian/1893760850" target="_blank" rel="noopener" class="action-btn">Apple Music</a>
+    </div>
+    <div style="margin-top: 40px; animation: fadeUp 1.5s ease-out 1s both;">
+      <a href="music.html" style="font-family: var(--font-heading); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s;"
+         onmouseover="this.style.color='var(--purple-glow)'" onmouseout="this.style.color='var(--grey)'">&larr; Back to Discography</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">Pills on the Parmesian</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+    <div class="footer-crosslink"><a href="../home.html">&larr; Heaven is Overrated</a></div>
+  </footer>
+
+  <script>
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY>80); });
+
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>
