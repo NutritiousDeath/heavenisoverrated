@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heaven is Overrated & Pills on the Parmesian</title>
-  <meta name="description" content="Heaven is Overrated & Pills on the Parmesian.">
+  <title>Heaven is Overrated — Instrumental Symphonic Metal</title>
+  <meta name="description" content="Heaven is Overrated — Instrumental Symphonic Metal. Enter. Remember. Ascend.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #0a0a0f; overflow: hidden; height: 100%; }
+    /* ═══ LOADING SCREEN ═══ */
+    body.loading { overflow: hidden; }
 
     .intro-overlay {
       position: fixed;
@@ -26,6 +27,7 @@
       pointer-events: none;
     }
 
+    /* Gate panels */
     .gate-left, .gate-right {
       position: absolute;
       top: 0;
@@ -38,6 +40,7 @@
     .gate-left { left: 0; }
     .gate-right { right: 0; }
 
+    /* Stone texture overlay on gates */
     .gate-left::before, .gate-right::before {
       content: '';
       position: absolute;
@@ -46,6 +49,7 @@
       opacity: 0.4;
     }
 
+    /* Gold seam down the middle */
     .gate-seam {
       position: absolute;
       top: 0;
@@ -59,6 +63,7 @@
       transition: opacity 0.4s ease;
     }
 
+    /* Crack effect before gates open */
     .gate-crack {
       position: absolute;
       top: 0;
@@ -81,6 +86,7 @@
       box-shadow: 0 0 30px rgba(184,157,106,0.5), 0 0 60px rgba(184,157,106,0.2);
     }
 
+    /* Center content */
     .intro-center {
       position: relative;
       z-index: 5;
@@ -89,6 +95,7 @@
       align-items: center;
     }
 
+    /* Ember */
     .intro-ember {
       width: 8px;
       height: 8px;
@@ -102,10 +109,19 @@
       transform: translate(-50%, -50%);
     }
 
-    .intro-compass { width: 120px; height: 120px; opacity: 0; }
+    /* Compass SVG */
+    .intro-compass {
+      width: 120px;
+      height: 120px;
+      opacity: 0;
+    }
     .intro-compass svg { width: 100%; height: 100%; }
-    .intro-compass .draw-line { stroke-dasharray: 200; stroke-dashoffset: 200; }
+    .intro-compass .draw-line {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+    }
 
+    /* Title */
     .intro-title {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(1.4rem, 4vw, 2.6rem);
@@ -119,6 +135,7 @@
       white-space: nowrap;
     }
 
+    /* Tagline */
     .intro-tagline {
       font-family: 'Cinzel', serif;
       font-size: 0.65rem;
@@ -130,9 +147,22 @@
       margin-top: 12px;
     }
 
-    .intro-particles { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
-    .particle { position: absolute; border-radius: 50%; background: #b89d6a; opacity: 0; }
+    /* Floating ember particles */
+    .intro-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: #b89d6a;
+      opacity: 0;
+    }
 
+    /* Pulse glow behind compass */
     .intro-glow {
       position: absolute;
       width: 200px;
@@ -145,11 +175,14 @@
       transform: translate(-50%, -50%);
     }
 
+    /* Gate open state */
     .intro-overlay.gates-open .gate-left { transform: translateX(-105%); }
     .intro-overlay.gates-open .gate-right { transform: translateX(105%); }
     .intro-overlay.gates-open .gate-seam { opacity: 0 !important; }
     .intro-overlay.gates-open .intro-center { opacity: 0; transition: opacity 0.4s ease; }
     .intro-overlay.gates-open .intro-particles { opacity: 0; transition: opacity 0.6s ease; }
+
+    /* Final hide */
     .intro-overlay.done { display: none; }
 
     @media (max-width: 480px) {
@@ -157,80 +190,9 @@
       .intro-title { letter-spacing: 3px; }
       .intro-tagline { letter-spacing: 4px; font-size: 0.55rem; }
     }
-
-    /* ═══ SPLASH CHOICE SCREEN ═══ */
-    .splash-choice {
-      position: fixed;
-      inset: 0;
-      z-index: 99998;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-    .splash-choice.visible { display: flex; opacity: 1; }
-    .splash-panel {
-      flex: 1;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      overflow: hidden;
-      cursor: pointer;
-      transition: flex 0.5s ease;
-    }
-    .splash-panel:hover { flex: 1.15; }
-    .splash-panel-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.6s ease, filter 0.6s ease;
-      filter: brightness(0.4) saturate(1.1);
-    }
-    .splash-panel:hover .splash-panel-bg { transform: scale(1.06); filter: brightness(0.55) saturate(1.2); }
-    .splash-panel-hisor .splash-panel-bg { background-color: #0a0a0f; }
-    .splash-panel-pills .splash-panel-bg { background-color: #050308; }
-    .splash-panel::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.65) 100%);
-    }
-    .splash-panel-content { position: relative; z-index: 2; text-align: center; padding: 20px; }
-    .splash-panel-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      letter-spacing: 3px;
-      color: #d4bf8a;
-      text-shadow: 0 0 25px rgba(184,157,106,0.4);
-      margin-bottom: 10px;
-    }
-    .splash-panel-pills .splash-panel-title { color: #b565ff; text-shadow: 0 0 25px rgba(139,47,214,0.5); }
-    .splash-panel-sub {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #8a847e;
-    }
-    .splash-seam {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(180deg, transparent, rgba(184,157,106,0.3), transparent);
-      z-index: 3;
-    }
-    @media (max-width: 640px) {
-      .splash-choice { flex-direction: column; }
-      .splash-seam { width: 100%; height: 1px; top: 50%; left: 0; transform: translateY(-50%); }
-    }
   </style>
 </head>
-<body>
+<body class="loading">
 
   <!-- ═══ CINEMATIC INTRO ═══ -->
   <div class="intro-overlay" id="introOverlay">
@@ -265,51 +227,135 @@
     </div>
   </div>
 
-  <!-- ═══ SPLASH CHOICE SCREEN ═══ -->
-  <div class="splash-choice" id="splashChoice">
-    <div class="splash-seam"></div>
-    <a href="#" class="splash-panel splash-panel-hisor" id="choiceHisor">
-      <div class="splash-panel-bg" style="background-image: url('Art/compass.jpg');"></div>
-      <div class="splash-panel-content">
-        <div class="splash-panel-title">Heaven is Overrated</div>
-        <div class="splash-panel-sub">Instrumental Symphonic Metal</div>
+  <!-- ═══ SITE CONTENT ═══ -->
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="music.html">Music</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-bg" style="background-image: url('Art/compass.jpg');"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Heaven is<br>Overrated</h1>
+      <p class="hero-subtitle">Instrumental Symphonic Metal</p>
+      <p class="hero-tagline">Enter. Remember. Ascend.</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Descend</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="section" style="background: radial-gradient(ellipse at 50% 0%, rgba(20,60,70,0.15) 0%, transparent 60%), var(--black);">
+    <div class="section-inner">
+      <div class="section-title reveal">Latest Release</div>
+      <div class="section-label reveal">Warfront Frequencies: Act I &middot; 2026</div>
+      <div class="reveal" style="display: flex; align-items: center; gap: 40px; max-width: 700px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
+        <a href="music/warfront-act1.html" style="flex-shrink: 0;">
+          <img src="Art/warfront-act1.jpg" alt="Warfront Frequencies: Act I" style="width: 220px; height: 220px; object-fit: cover; border: 1px solid rgba(107,90,62,0.2); box-shadow: 0 0 40px rgba(0,0,0,0.5); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <div style="flex: 1; min-width: 200px; text-align: center;">
+          <div style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-light); letter-spacing: 3px; margin-bottom: 8px;">Warfront Frequencies: Act I</div>
+          <div style="font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--purple-light); margin-bottom: 20px;">EP &middot; 5 Tracks &middot; 2026</div>
+          <p style="font-size: 1.05rem; line-height: 1.8; opacity: 0.85; margin-bottom: 24px;">Mobilization has begun. Hit play.</p>
+          <a href="music/warfront-act1.html" class="action-btn primary">Listen Now</a>
+        </div>
       </div>
-    </a>
-    <a href="pills/index.html" class="splash-panel splash-panel-pills" id="choicePills">
-      <div class="splash-panel-bg" style="background-image: url('pills/art/aura-hero.png');"></div>
-      <div class="splash-panel-content">
-        <div class="splash-panel-title">Pills on the Parmesian</div>
-        <div class="splash-panel-sub">The Signal That Survives</div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-diamond"></div></div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-title reveal">Discography</div>
+      <div class="section-label reveal">Explore All Releases</div>
+      <div class="album-grid reveal">
+        <a href="music/warfront-act1.html" class="album-card">
+          <img src="Art/warfront-act1.jpg" alt="Warfront Frequencies: Act I" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">Warfront Frequencies: Act I</div>
+            <div class="album-card-meta">EP &middot; 5 Tracks &middot; 2026</div>
+          </div>
+        </a>
+        <a href="music/novafide.html" class="album-card">
+          <img src="Art/novafide.png" alt="NovaFide" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">NovaFide</div>
+            <div class="album-card-meta">Single · 2026</div>
+          </div>
+        </a>
+        <a href="music/ashes.html" class="album-card">
+          <img src="Art/ashes.png" alt="Ashes of Ascension" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">Ashes of Ascension</div>
+            <div class="album-card-meta">Full Album · 14 Tracks · 2026</div>
+          </div>
+        </a>
+        <a href="music/sparks.html" class="album-card">
+          <img src="Art/Sparks.png" alt="Symphony of Sparks" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">Symphony of Sparks</div>
+            <div class="album-card-meta">2 Tracks · 2026</div>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
+      <div style="text-align: center; margin-top: 40px;" class="reveal">
+        <a href="music.html" class="action-btn">View All Music</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-diamond"></div></div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-title reveal">Follow</div>
+      <div class="section-label reveal">Stream Everywhere</div>
+      <div class="action-row reveal">
+        <a href="https://open.spotify.com/artist/3CElMQrmVL4bXO52aQG09V" target="_blank" rel="noopener" class="action-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Spotify
+        </a>
+        <a href="https://music.youtube.com/channel/UCTu9P7F57HkLjvuessj2ccQ" target="_blank" rel="noopener" class="action-btn">
+          <svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418c-.86.23-1.538.908-1.768 1.768C2 7.746 2 12 2 12s0 4.254.418 5.814c.23.86.908 1.538 1.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814zM10 15.464V8.536L16 12l-6 3.464z"/></svg>
+          YT Music
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="compass">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.5" color="#6b5a3e">
+        <circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/>
+        <line x1="20" y1="2" x2="20" y2="38"/><line x1="2" y1="20" x2="38" y2="20"/>
+        <line x1="8" y1="8" x2="32" y2="32" stroke-dasharray="2 3"/><line x1="32" y1="8" x2="8" y2="32" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <div class="footer-logo">Heaven is Overrated</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+  </footer>
 
   <script>
+    /* ═══ CINEMATIC INTRO SEQUENCE ═══ */
     (function() {
-      var splashChoice = document.getElementById('splashChoice');
-      var introOverlay = document.getElementById('introOverlay');
-
-      function showSplash() {
-        splashChoice.classList.add('visible');
-      }
-
-      var siteChosen = sessionStorage.getItem('hisor_site_choice');
-      var introSeen = sessionStorage.getItem('hisor_intro_seen');
-
-      // Already chose Heaven is Overrated this session — redirect immediately, no animation
-      if (siteChosen) {
-        window.location.replace('home.html');
+      // Only show intro once per session
+      if (sessionStorage.getItem('hisor_intro_seen')) {
+        document.getElementById('introOverlay').classList.add('done');
+        document.body.classList.remove('loading');
         return;
       }
 
-      // Seen the gate animation before, but hasn't chosen yet — skip gate, show splash immediately
-      if (introSeen) {
-        introOverlay.classList.add('done');
-        showSplash();
-        return;
-      }
-
-      var overlay = introOverlay;
+      var overlay = document.getElementById('introOverlay');
       var ember = document.getElementById('introEmber');
       var compass = document.getElementById('introCompass');
       var glow = document.getElementById('introGlow');
@@ -320,6 +366,7 @@
       var particlesContainer = document.getElementById('particles');
       var drawLines = document.querySelectorAll('.draw-line');
 
+      // Inject particle keyframes with random drift
       var style = document.createElement('style');
       var keyframes = '';
       for (var k = 0; k < 6; k++) {
@@ -343,6 +390,7 @@
         }
       }
 
+      // === PHASE 1: Ember ignites (0 → 800ms) ===
       setTimeout(function() {
         ember.style.transition = 'opacity 0.6s ease, box-shadow 0.6s ease, width 0.3s ease, height 0.3s ease';
         ember.style.opacity = '1';
@@ -357,6 +405,7 @@
         }, 300);
       }, 400);
 
+      // === PHASE 2: Ember → Compass draws (1200ms) ===
       setTimeout(function() {
         ember.style.transition = 'opacity 0.3s ease';
         ember.style.opacity = '0';
@@ -375,6 +424,7 @@
         spawnParticles();
       }, 1200);
 
+      // === PHASE 3: Compass pulse + title (2800ms) ===
       setTimeout(function() {
         glow.style.transition = 'width 0.6s ease, height 0.6s ease, opacity 0.6s ease';
         glow.style.width = '280px';
@@ -392,12 +442,14 @@
         setTimeout(function() { title.style.transform = 'translateY(0)'; }, 50);
       }, 2800);
 
+      // === PHASE 4: Tagline + seam glow (3600ms) ===
       setTimeout(function() {
         tagline.style.transition = 'opacity 0.6s ease';
         tagline.style.opacity = '1';
         seam.style.opacity = '1';
       }, 3600);
 
+      // === PHASE 5: Crack + gates split (4600ms) ===
       setTimeout(function() {
         crack.style.transition = 'opacity 0.15s ease';
         crack.style.opacity = '1';
@@ -412,7 +464,7 @@
           seam.style.transition = 'opacity 0.3s ease';
           seam.style.opacity = '0';
           overlay.classList.add('gates-open');
-          showSplash();
+          document.body.classList.remove('loading');
         }, 400);
 
         setTimeout(function() {
@@ -422,12 +474,33 @@
       }, 4600);
     })();
 
-    document.getElementById('choiceHisor').addEventListener('click', function(e) {
-      e.preventDefault();
-      sessionStorage.setItem('hisor_site_choice', '1');
-      window.location.href = 'home.html';
-    });
-    /* Pills panel uses a normal href — navigates directly to pills/index.html */
+    /* ═══ SITE JS ═══ */
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 80); });
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    /* Hamburger menu */
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
   </script>
 
 </body>

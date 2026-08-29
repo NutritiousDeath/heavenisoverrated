@@ -24,10 +24,8 @@
     <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="music.html" class="active">Music</a>
-      <a href="videos.html">Videos</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-      <a href="pills/index.html">Pills on the Parmesian</a>
     </div>
   </nav>
 
@@ -46,12 +44,12 @@
 
       <div class="album-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
 
-        <!-- The End of Everything (Released) -->
-        <a href="music/eoe.html" class="album-card">
-          <img src="Art/eoe.png" alt="The End of Everything" class="album-card-art">
+        <!-- Warfront Frequencies: Act I (newest) -->
+        <a href="music/warfront-act1.html" class="album-card">
+          <img src="Art/warfront-act1.jpg" alt="Warfront Frequencies: Act I" class="album-card-art">
           <div class="album-card-info">
-            <div class="album-card-title">The End of Everything</div>
-            <div class="album-card-meta">Full Album · 2026</div>
+            <div class="album-card-title">Warfront Frequencies: Act I</div>
+            <div class="album-card-meta">EP &middot; 5 Tracks &middot; 2026</div>
           </div>
         </a>
 
@@ -81,6 +79,15 @@
             <div class="album-card-meta">2 Tracks · 2026</div>
           </div>
         </a>
+
+        <!-- The End of Everything (Coming Soon) -->
+        <div class="album-card coming-soon">
+          <img src="Art/eoe.png" alt="The End of Everything" class="album-card-art">
+          <div class="album-card-info">
+            <div class="album-card-title">The End of Everything</div>
+            <div class="album-card-meta">Coming June 9th 2026</div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -128,6 +135,7 @@
     }, { threshold: 0.15 });
     reveals.forEach(function(el) { observer.observe(el); });
 
+    /* Hamburger menu */
     var hamburger = document.getElementById('navHamburger');
     var navLinks = document.getElementById('navLinks');
     var navOverlay = document.getElementById('navOverlay');
