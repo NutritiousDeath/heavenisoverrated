@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warfront Frequencies: Act II — Heaven is Overrated</title>
+  <meta name="description" content="Warfront Frequencies: Act II — Engagement. A 5-track EP by Heaven is Overrated. Instrumental Industrial Symphonic Metal. 2026.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a>
+      <a href="../music.html" class="active">Music</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="page-header" style="padding-bottom: 40px;">
+    <div class="page-header-bg" style="background-image: url('../Art/warfront-act2.jpg');"></div>
+    <div class="page-header-content">
+      <div class="section-title">Warfront Frequencies: Act II</div>
+      <div class="section-label">EP &middot; 5 Tracks &middot; Act II &mdash; Engagement &middot; 2026</div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 40px; background: radial-gradient(ellipse at 50% 0%, rgba(70,20,40,0.15) 0%, transparent 60%), var(--black);">
+    <div class="section-inner">
+
+      <div class="custom-player reveal" id="player">
+        <div class="cp-header">
+          <div class="cp-art"><img id="playerArt" src="../Art/warfront-act2.jpg" alt="Warfront Frequencies: Act II"></div>
+          <div class="cp-info">
+            <div class="cp-album-title">Warfront Frequencies: Act II</div>
+            <div class="cp-album-type">EP &middot; Act II &mdash; Engagement &middot; 2026</div>
+            <div class="cp-now-playing">Now playing: <span id="playerTrackName">Weapons Free</span></div>
+          </div>
+        </div>
+        <div class="cp-controls">
+          <button class="cp-btn" id="prevBtn" title="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+          <button class="cp-btn play" id="playBtn" title="Play">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <button class="cp-btn" id="nextBtn" title="Next"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+        </div>
+        <div class="cp-progress">
+          <div class="cp-bar-bg" id="progressBar"><div class="cp-bar-fill" id="progressFill"></div></div>
+          <div class="cp-times"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
+        </div>
+        <div class="cp-tracklist" id="tracklist"></div>
+      </div>
+
+      <div class="action-row reveal" style="margin-top: 30px;">
+        <a href="https://open.spotify.com/artist/3CElMQrmVL4bXO52aQG09V" target="_blank" rel="noopener" class="action-btn primary">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Stream on Spotify
+        </a>
+        <a href="https://music.youtube.com/channel/UCTu9P7F57HkLjvuessj2ccQ" target="_blank" rel="noopener" class="action-btn">
+          <svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418c-.86.23-1.538.908-1.768 1.768C2 7.746 2 12 2 12s0 4.254.418 5.814c.23.86.908 1.538 1.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814zM10 15.464V8.536L16 12l-6 3.464z"/></svg>
+          YT Music
+        </a>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;" class="reveal">
+        <a href="../music.html" style="font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--grey)'">&larr; Back to Discography</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="compass">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.5" color="#6b5a3e">
+        <circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/>
+        <line x1="20" y1="2" x2="20" y2="38"/><line x1="2" y1="20" x2="38" y2="20"/>
+        <line x1="8" y1="8" x2="32" y2="32" stroke-dasharray="2 3"/><line x1="32" y1="8" x2="8" y2="32" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <div class="footer-logo">Heaven is Overrated</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+  </footer>
+
+  <script>
+    var tracks = [
+      { num: 1, name: "Weapons Free",  file: "../Songs/WarfrontAct2/06 - Weapons Free.mp3" },
+      { num: 2, name: "Danger Close",  file: "../Songs/WarfrontAct2/07 - Danger Close.mp3" },
+      { num: 3, name: "Fire for Effect", file: "../Songs/WarfrontAct2/08 - Fire for Effect.mp3" },
+      { num: 4, name: "Hold the Line", file: "../Songs/WarfrontAct2/09 - Hold the Line.mp3" },
+      { num: 5, name: "No Man's Land", file: "../Songs/WarfrontAct2/10 - No Man's Land.mp3" }
+    ];
+
+    var audio = new Audio();
+    var currentTrackIndex = 0;
+    var isPlaying = false;
+    var playerTrackName = document.getElementById('playerTrackName');
+    var playBtn = document.getElementById('playBtn');
+    var playIcon = document.getElementById('playIcon');
+    var pauseIcon = document.getElementById('pauseIcon');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var progressBar = document.getElementById('progressBar');
+    var progressFill = document.getElementById('progressFill');
+    var currentTimeEl = document.getElementById('currentTime');
+    var totalTimeEl = document.getElementById('totalTime');
+    var tracklist = document.getElementById('tracklist');
+
+    function formatTime(s) { if (isNaN(s)) return '0:00'; var m = Math.floor(s/60); var sec = Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+
+    function buildTracklist() {
+      tracklist.innerHTML = '';
+      tracks.forEach(function(track, i) {
+        var div = document.createElement('div');
+        div.className = 'cp-track' + (i === 0 ? ' active' : '');
+        div.innerHTML = '<span class="cp-track-num">'+String(track.num).padStart(2,'0')+'</span><span class="cp-track-name">'+track.name+'</span><span class="cp-track-dur" data-index="'+i+'">--:--</span>';
+        div.addEventListener('click', function() { currentTrackIndex = i; loadTrack(i); playTrack(); });
+        tracklist.appendChild(div);
+      });
+    }
+
+    function loadTrack(index) {
+      if (!tracks[index]) return;
+      audio.src = tracks[index].file; audio.load();
+      playerTrackName.textContent = tracks[index].name;
+      tracklist.querySelectorAll('.cp-track').forEach(function(el,i){ el.classList.toggle('active', i===index); });
+      progressFill.style.width = '0%'; currentTimeEl.textContent = '0:00';
+    }
+
+    function playTrack() { audio.play().then(function(){ isPlaying=true; playIcon.style.display='none'; pauseIcon.style.display='block'; }).catch(function(){}); }
+    function pauseTrack() { audio.pause(); isPlaying=false; playIcon.style.display='block'; pauseIcon.style.display='none'; }
+
+    playBtn.addEventListener('click', function(){ if(isPlaying) pauseTrack(); else playTrack(); });
+    prevBtn.addEventListener('click', function(){ if(audio.currentTime>3){audio.currentTime=0;}else{currentTrackIndex=(currentTrackIndex-1+tracks.length)%tracks.length; loadTrack(currentTrackIndex); if(isPlaying) playTrack();} });
+    nextBtn.addEventListener('click', function(){ currentTrackIndex=(currentTrackIndex+1)%tracks.length; loadTrack(currentTrackIndex); if(isPlaying) playTrack(); });
+
+    audio.addEventListener('timeupdate', function(){ if(audio.duration){ progressFill.style.width=(audio.currentTime/audio.duration*100)+'%'; currentTimeEl.textContent=formatTime(audio.currentTime); } });
+    audio.addEventListener('loadedmetadata', function(){ totalTimeEl.textContent=formatTime(audio.duration); var d=tracklist.querySelector('[data-index="'+currentTrackIndex+'"]'); if(d) d.textContent=formatTime(audio.duration); });
+    audio.addEventListener('ended', function(){ if(currentTrackIndex<tracks.length-1){currentTrackIndex++;loadTrack(currentTrackIndex);playTrack();}else{pauseTrack();currentTrackIndex=0;loadTrack(0);} });
+    progressBar.addEventListener('click', function(e){ if(audio.duration){var r=progressBar.getBoundingClientRect(); audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;} });
+
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY>80); });
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){ entries.forEach(function(entry){ if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);} }); }, {threshold:0.15});
+    reveals.forEach(function(el){ observer.observe(el); });
+
+    buildTracklist();
+    loadTrack(0);
+
+    /* Hamburger menu */
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>
