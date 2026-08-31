@@ -19,46 +19,106 @@
       inset: 0;
       z-index: 99999;
       background-color: #05030a;
-      background-image: radial-gradient(circle at center, #150a24 0%, #05030a 100%);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       transition: opacity 0.6s ease, visibility 0.6s ease;
     }
     .gate.gate-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
+    /* gritty photo backdrop, same treatment as .hero-bg elsewhere on the site */
+    .gate-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('art/gate-bg.jpg');
+      background-size: cover;
+      background-position: center 15%;
+      filter: saturate(1.05);
+      z-index: 0;
+    }
+    .gate-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5,3,8,0.55) 0%, rgba(5,3,8,0.75) 55%, rgba(5,3,8,0.92) 100%),
+        radial-gradient(ellipse at 50% 45%, transparent 0%, rgba(5,3,8,0.55) 75%);
+    }
+
     .gate-ambient-glow {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(147,51,234,0.15) 0%, rgba(219,39,119,0.05) 40%, transparent 70%);
+      background: radial-gradient(circle at 50% 45%, rgba(147,51,234,0.22) 0%, rgba(219,39,119,0.08) 40%, transparent 72%);
+      mix-blend-mode: screen;
       pointer-events: none;
       z-index: 1;
     }
 
+    /* film grain, same trick as the old signal-lock intro */
+    .gate-grain {
+      position: absolute;
+      inset: -2%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: gateStaticHiss 0.2s steps(2) infinite;
+    }
+    @keyframes gateStaticHiss { 0% { transform: translate(0,0); } 100% { transform: translate(-1px,1px); } }
+
+    .gate-scanline {
+      position: absolute;
+      left: 0; right: 0;
+      top: -10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan, #3ee8ff), var(--purple-glow, #b565ff), transparent);
+      box-shadow: 0 0 16px rgba(62,232,255,0.5), 0 0 30px rgba(139,47,214,0.35);
+      opacity: 0;
+      z-index: 3;
+      pointer-events: none;
+      animation: gateScanSweep 6s linear infinite;
+    }
+    @keyframes gateScanSweep {
+      0%   { top: -5%; opacity: 0; }
+      4%   { opacity: 0.75; }
+      45%  { opacity: 0.75; }
+      52%  { opacity: 0; }
+      100% { top: 108%; opacity: 0; }
+    }
+
     .gate-container {
       position: relative;
-      z-index: 2;
+      z-index: 4;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 3rem;
       max-width: 1200px;
       padding: 2rem;
+      animation: gateGlitch 8s infinite;
+    }
+    @keyframes gateGlitch {
+      0%, 95%, 100% { transform: translate(0,0); filter: none; }
+      96% { transform: translate(-3px, 1px); filter: hue-rotate(12deg) saturate(1.5); }
+      97% { transform: translate(2px, -1px); filter: hue-rotate(-8deg); }
+      98% { transform: translate(-1px, 0); filter: none; }
     }
 
     .gate-kanji {
-      width: 90px;
-      height: 450px;
+      width: 84px;
+      height: 460px;
       flex-shrink: 0;
       overflow: hidden;
-      border: 1px solid rgba(168,85,247,0.3);
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 0 20px rgba(147,51,234,0.15);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
     }
     .gate-kanji img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: drop-shadow(0 0 10px rgba(168,85,247,0.5));
+      opacity: 0.85;
+      filter: drop-shadow(0 0 12px rgba(168,85,247,0.45));
     }
 
     .gate-core {
@@ -71,8 +131,8 @@
 
     .gate-logo-frame {
       position: relative;
-      width: 340px;
-      height: 340px;
+      width: 320px;
+      height: 320px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -81,12 +141,12 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 0 15px rgba(147,51,234,0.3));
+      filter: drop-shadow(0 0 15px rgba(147,51,234,0.35));
       animation: gateCorePulse 4s ease-in-out infinite alternate;
     }
     @keyframes gateCorePulse {
-      0%   { filter: drop-shadow(0 0 15px rgba(147,51,234,0.3)); transform: scale(1); }
-      100% { filter: drop-shadow(0 0 30px rgba(219,39,119,0.6)); transform: scale(1.02); }
+      0%   { filter: drop-shadow(0 0 15px rgba(147,51,234,0.35)); transform: scale(1); }
+      100% { filter: drop-shadow(0 0 32px rgba(219,39,119,0.65)); transform: scale(1.02); }
     }
 
     .gate-waveform {
@@ -102,45 +162,60 @@
       letter-spacing: 0.2rem;
       color: #c084fc;
       text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(192,132,252,0.5);
     }
     .gate-status.blink { animation: gateBlink 1.2s steps(1) infinite; }
     @keyframes gateBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
     .gate-waveform-bar {
+      position: relative;
       width: 260px;
       max-width: 60vw;
-      height: 4px;
-      background: linear-gradient(90deg, #06b6d4, #a855f7, #db2777);
-      box-shadow: 0 0 10px rgba(6,182,212,0.5);
+      height: 3px;
+      background: rgba(168,85,247,0.2);
+      overflow: hidden;
+    }
+    .gate-waveform-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--purple-glow, #b565ff), var(--magenta, #ff2ec4), transparent);
+      box-shadow: 0 0 10px rgba(181,101,255,0.55);
+      animation: gateBarSweep 2.2s ease-in-out infinite;
+    }
+    @keyframes gateBarSweep {
+      0%   { left: -40%; }
+      100% { left: 100%; }
     }
 
     .gate-enter-btn {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.3rem;
-      color: #ffffff;
-      background: linear-gradient(135deg, #1e1b4b, #3b0764);
-      border: 1px solid #a855f7;
-      padding: 0.9rem 2.5rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.25rem;
+      color: var(--purple-glow, #b565ff);
+      background: rgba(15,8,25,0.4);
+      border: 1px solid rgba(168,85,247,0.5);
+      padding: 0.85rem 2.4rem;
       cursor: pointer;
-      box-shadow: 0 0 15px rgba(168,85,247,0.3);
       transition: all 0.3s ease;
       text-transform: uppercase;
       outline: none;
       margin-top: 0.5rem;
     }
     .gate-enter-btn:hover {
-      background: linear-gradient(135deg, #312e81, #581c87);
-      border-color: #06b6d4;
-      box-shadow: 0 0 25px rgba(6,182,212,0.6);
-      color: #22d3ee;
-      transform: translateY(-2px);
+      border-color: var(--cyan, #3ee8ff);
+      background: rgba(139,47,214,0.16);
+      box-shadow: 0 0 20px rgba(6,182,212,0.35);
+      color: var(--cyan, #3ee8ff);
     }
-    .gate-enter-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+    .gate-enter-btn:disabled { opacity: 0.55; cursor: default; }
 
     @media (max-width: 900px) {
       .gate-kanji { display: none; }
-      .gate-logo-frame { width: 260px; height: 260px; }
+      .gate-logo-frame { width: 250px; height: 250px; }
+      .gate-bg { background-position: center 10%; }
     }
   </style>
 </head>
@@ -148,7 +223,10 @@
 
   <!-- ═══ TRANSMISSION GATE ═══ -->
   <div class="gate" id="gate">
+    <div class="gate-bg"></div>
     <div class="gate-ambient-glow"></div>
+    <div class="gate-grain"></div>
+    <div class="gate-scanline"></div>
     <div class="gate-container">
       <div class="gate-kanji"><img src="art/kanji-banner.jpg" alt=""></div>
       <div class="gate-core">
