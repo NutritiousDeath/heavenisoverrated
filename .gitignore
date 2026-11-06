@@ -1,0 +1,7 @@
+# Working files from Claude sessions (overlays, renders) - not part of the site
+Claude outputs/
+
+# Windows / editor junk
+Thumbs.db
+desktop.ini
+*.swp
