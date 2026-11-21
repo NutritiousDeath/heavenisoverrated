@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destined Metal — Heaven is Overrated</title>
+  <meta name="description" content="Destined Metal — a 12-track album by Heaven is Overrated, with a full art book of the album's artwork.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ===== ART BOOK (Destined Metal page only) ===== */
+    .artbook-intro { font-family: var(--font-body); font-size: 1.15rem; font-style: italic; color: var(--grey); text-align: center; max-width: 560px; margin: -30px auto 50px; line-height: 1.7; }
+
+    .artbook-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 860px; margin: 0 auto; }
+
+    .plate { position: relative; background: linear-gradient(180deg, rgba(26,23,20,0.95), rgba(10,10,15,0.95)); border: 1px solid rgba(107,90,62,0.25); padding: 12px 12px 16px; cursor: pointer; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; text-align: center; }
+    .plate::before { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(184,157,106,0.12); pointer-events: none; }
+    .plate:hover, .plate:focus-visible { transform: translateY(-6px); border-color: rgba(184,157,106,0.6); box-shadow: 0 14px 40px rgba(0,0,0,0.6), 0 0 25px rgba(139,95,207,0.18); outline: none; }
+    .plate-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; filter: brightness(0.82) saturate(0.95); transition: filter 0.4s ease; }
+    .plate:hover .plate-img { filter: brightness(1) saturate(1); }
+    .plate-num { font-family: var(--font-heading); font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase; color: var(--purple-light); margin-top: 14px; }
+    .plate-title { font-family: var(--font-heading); font-size: 0.85rem; letter-spacing: 2px; color: var(--gold-light); margin-top: 6px; }
+    .plate-sub { font-family: var(--font-body); font-style: italic; font-size: 0.9rem; color: var(--grey); margin-top: 2px; }
+
+    .artbook-open-btn { display: block; margin: 40px auto 0; }
+
+    /* Viewer */
+    .book-viewer { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, rgba(42,26,58,0.55) 0%, rgba(5,5,8,0.97) 70%); backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.35s ease; padding: 20px; }
+    .book-viewer.open { display: flex; }
+    .book-viewer.visible { opacity: 1; }
+
+    .book { display: flex; width: min(1100px, 100%); max-height: calc(100vh - 100px); background: var(--stone-dark); border: 1px solid rgba(184,157,106,0.35); box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 60px rgba(139,95,207,0.15); perspective: 2000px; position: relative; }
+    .book::after { content: ''; position: absolute; top: 0; bottom: 0; left: 62%; width: 30px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.45) 55%, transparent); pointer-events: none; }
+
+    .book-page { position: relative; padding: 28px; }
+    .book-page::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(184,157,106,0.18); pointer-events: none; }
+    .book-left { flex: 0 0 62%; display: flex; align-items: center; justify-content: center; background: #08080c; }
+    .book-left img { max-width: 100%; max-height: calc(100vh - 160px); aspect-ratio: 1 / 1; object-fit: contain; display: block; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+    .book-right { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 40px 36px; background: linear-gradient(180deg, rgba(42,37,32,0.6), rgba(26,23,20,1)); }
+
+    .book-plate-num { font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 6px; text-transform: uppercase; color: var(--purple-light); }
+    .book-title { font-family: var(--font-display); font-size: clamp(1.2rem, 2.4vw, 1.9rem); font-weight: 700; letter-spacing: 3px; color: var(--gold); margin: 18px 0 10px; line-height: 1.3; }
+    .book-sub { font-family: var(--font-body); font-style: italic; font-size: 1.1rem; color: var(--cream); opacity: 0.8; }
+    .book-rule { width: 60px; height: 1px; background: var(--gold-dark); margin: 26px auto; position: relative; }
+    .book-rule::after { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; background: var(--gold); transform: translate(-50%,-50%) rotate(45deg); }
+    .book-play { align-self: center; }
+    .book-counter { font-family: var(--font-heading); font-size: 0.55rem; letter-spacing: 4px; color: var(--grey); margin-top: 30px; }
+
+    .book.turn-next { animation: turnNext 0.5s ease; }
+    .book.turn-prev { animation: turnPrev 0.5s ease; }
+    @keyframes turnNext { 0% { transform: rotateY(0); opacity: 1; } 45% { transform: rotateY(-8deg) translateX(-20px); opacity: 0.2; } 55% { transform: rotateY(8deg) translateX(20px); opacity: 0.2; } 100% { transform: rotateY(0); opacity: 1; } }
+    @keyframes turnPrev { 0% { transform: rotateY(0); opacity: 1; } 45% { transform: rotateY(8deg) translateX(20px); opacity: 0.2; } 55% { transform: rotateY(-8deg) translateX(-20px); opacity: 0.2; } 100% { transform: rotateY(0); opacity: 1; } }
+
+    .bv-btn { position: absolute; background: rgba(10,10,15,0.7); border: 1px solid rgba(184,157,106,0.35); color: var(--gold); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; z-index: 3; }
+    .bv-btn:hover { background: rgba(42,26,58,0.85); border-color: var(--purple-glow); color: var(--purple-light); box-shadow: 0 0 20px rgba(139,95,207,0.35); }
+    .bv-btn svg { width: 22px; height: 22px; fill: currentColor; }
+    .bv-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .bv-next { right: 20px; top: 50%; transform: translateY(-50%); }
+    .bv-close { right: 20px; top: 20px; }
+
+    @media (max-width: 860px) {
+      .book { flex-direction: column; max-height: calc(100vh - 40px); overflow-y: auto; }
+      .book::after { display: none; }
+      .book-left { flex: none; padding: 16px; }
+      .book-left img { max-height: 60vh; }
+      .book-right { padding: 24px 20px 28px; }
+      .book-rule { margin: 18px auto; }
+      .book-counter { margin-top: 18px; }
+      .bv-prev, .bv-next { top: auto; bottom: 14px; transform: none; }
+      .bv-prev { left: 14px; } .bv-next { right: 14px; }
+      .bv-close { right: 14px; top: 14px; }
+    }
+    @media (max-width: 640px) {
+      .artbook-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .plate { padding: 8px 8px 12px; }
+      .plate-title { font-size: 0.7rem; letter-spacing: 1px; }
+      .plate-sub { font-size: 0.8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .book.turn-next, .book.turn-prev { animation: none; } }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="nav scrolled" id="nav">
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="../home.html">Home</a>
+      <a href="../music.html" class="active">Music</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../pills/index.html">Pills on the Parmesian</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="page-header" style="padding-bottom: 40px;">
+    <div class="page-header-bg" style="background-image: url('../Art/destined-metal.jpg');"></div>
+    <div class="page-header-content">
+      <div class="section-title">Destined Metal</div>
+      <div class="section-label">Full Album &middot; 9 Tracks + 3 Bonus &middot; 2025</div>
+    </div>
+  </div>
+
+  <!-- PLAYER -->
+  <section class="section" style="padding-top: 40px; background: radial-gradient(ellipse at 50% 0%, rgba(40,70,110,0.15) 0%, transparent 60%), var(--black);">
+    <div class="section-inner">
+
+      <div class="custom-player reveal" id="player">
+        <div class="cp-header">
+          <div class="cp-art"><img id="playerArt" src="../Art/destined-metal.jpg" alt="Destined Metal"></div>
+          <div class="cp-info">
+            <div class="cp-album-title">Destined Metal</div>
+            <div class="cp-album-type">Full Album &middot; 12 Tracks &middot; 2025</div>
+            <div class="cp-now-playing">Now playing: <span id="playerTrackName">Twilight Gap, Part 1</span></div>
+          </div>
+        </div>
+        <div class="cp-controls">
+          <button class="cp-btn" id="prevBtn" title="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+          <button class="cp-btn play" id="playBtn" title="Play">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <button class="cp-btn" id="nextBtn" title="Next"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+        </div>
+        <div class="cp-progress">
+          <div class="cp-bar-bg" id="progressBar"><div class="cp-bar-fill" id="progressFill"></div></div>
+          <div class="cp-times"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
+        </div>
+        <div class="cp-tracklist" id="tracklist"></div>
+      </div>
+
+      <div class="action-row reveal" style="margin-top: 30px;">
+        <a href="https://open.spotify.com/artist/3CElMQrmVL4bXO52aQG09V" target="_blank" rel="noopener" class="action-btn primary">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Stream on Spotify
+        </a>
+        <a href="https://music.youtube.com/channel/UCTu9P7F57HkLjvuessj2ccQ" target="_blank" rel="noopener" class="action-btn">
+          <svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.477 2.477 0 00-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418c-.86.23-1.538.908-1.768 1.768C2 7.746 2 12 2 12s0 4.254.418 5.814c.23.86.908 1.538 1.768 1.768C5.746 20 12 20 12 20s6.254 0 7.814-.418a2.477 2.477 0 001.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814zM10 15.464V8.536L16 12l-6 3.464z"/></svg>
+          YT Music
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-diamond"></div></div>
+
+  <!-- ART BOOK -->
+  <section class="section" id="artbook" style="background: radial-gradient(ellipse at 50% 30%, rgba(42,26,58,0.25) 0%, transparent 65%), var(--black);">
+    <div class="section-inner" style="max-width: 1000px;">
+      <div class="section-title reveal">The Art Book</div>
+      <div class="section-label reveal">Destined Metal &middot; Collected Plates</div>
+      <p class="artbook-intro reveal">The artwork behind every chapter of the record. Select a plate to open the book.</p>
+
+      <div class="artbook-grid reveal" id="artbookGrid"></div>
+
+      <button class="action-btn primary artbook-open-btn reveal" id="openBookBtn" type="button">
+        <svg viewBox="0 0 24 24"><path d="M21 4H3a1 1 0 00-1 1v14a1 1 0 001 1h7a2 2 0 012 2 2 2 0 012-2h7a1 1 0 001-1V5a1 1 0 00-1-1zM11 18.3A3.9 3.9 0 0010 18H4V6h6a1 1 0 011 1zm9-.3h-6a3.9 3.9 0 00-1 .3V7a1 1 0 011-1h6z"/></svg>
+        Open the Book
+      </button>
+
+      <div style="text-align: center; margin-top: 50px;" class="reveal">
+        <a href="../music.html" style="font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--grey)'">&larr; Back to Discography</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK VIEWER -->
+  <div class="book-viewer" id="bookViewer" role="dialog" aria-modal="true" aria-label="Destined Metal art book">
+    <button class="bv-btn bv-close" id="bvClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    <button class="bv-btn bv-prev" id="bvPrev" aria-label="Previous plate"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+    <button class="bv-btn bv-next" id="bvNext" aria-label="Next plate"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+
+    <div class="book" id="book">
+      <div class="book-page book-left"><img id="bookImg" src="" alt=""></div>
+      <div class="book-page book-right">
+        <div class="book-plate-num" id="bookPlateNum"></div>
+        <div class="book-title" id="bookTitle"></div>
+        <div class="book-sub" id="bookSub"></div>
+        <div class="book-rule"></div>
+        <button class="action-btn book-play" id="bookPlay" type="button">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <span id="bookPlayLabel">Play this track</span>
+        </button>
+        <div class="book-counter" id="bookCounter"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="compass">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.5" color="#6b5a3e">
+        <circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/>
+        <line x1="20" y1="2" x2="20" y2="38"/><line x1="2" y1="20" x2="38" y2="20"/>
+        <line x1="8" y1="8" x2="32" y2="32" stroke-dasharray="2 3"/><line x1="32" y1="8" x2="8" y2="32" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <div class="footer-logo">Heaven is Overrated</div>
+    <div class="footer-sub">&copy; 2026 &mdash; All Rights Reserved</div>
+  </footer>
+
+  <script>
+    var SONG_DIR = "../Songs/Destined Metal/mp3/";
+    var ART_DIR = "../Art/destined-metal/";
+    var COVER = "../Art/destined-metal.jpg";
+
+    /* art: filename in Art/destined-metal/ (null = album cover shown in player) */
+    var tracks = [
+      { num: "01", name: "Twilight Gap, Part 1",  file: "01 Twilight Gap part 1.mp3",       art: "01-twilight-gap" },
+      { num: "02", name: "Twilight Gap, Part 2",  file: "02 Twilight Gar part 2.mp3",       art: "02-twilight-gap-pt2" },
+      { num: "03", name: "Shatter the Throne",    file: "03 Shatter the Throne.mp3",        art: "03-shatter-the-throne" },
+      { num: "04", name: "Crota's End",           file: "04 Crota's End.mp3",               art: null },
+      { num: "05", name: "The Taken King",        file: "05 The Taken King.mp3",            art: "05-the-taken-king" },
+      { num: "06", name: "The Splicer Priest",    file: "06 The Splicer Priest.mp3",        art: null },
+      { num: "07", name: "Leviathan Dies",        file: "07 Livathen Dies.mp3",             art: null },
+      { num: "08", name: "Shatter the Witness",   file: "08 Shatter the Witness.mp3",       art: "08-shatter-the-witness" },
+      { num: "09", name: "Vengeance for Amanda",  file: "09 Vengance for Amanda.mp3",       art: null },
+      { num: "B1", name: "NutritiousDeath",       file: "Bonus 01 - Nutritiousdeath.mp3",   art: "b1-nutritiousdeath", bonus: true },
+      { num: "B2", name: "Geometric Signs",       file: "Bonus 02 - Geometric Signs.mp3",   art: "b2-geometric-signs", bonus: true },
+      { num: "B3", name: "Dungeon Sherpa",        file: "Bonus 03 - Dungeon Sherpa.mp3",    art: "b3-dungeon-sherpa", bonus: true }
+    ];
+
+    /* Art book plates: cover first, then every track that has art, in track order */
+    var ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV"];
+    var plates = [{ art: "00-destined-metal", title: "Destined Metal", sub: "The Album Cover", track: -1 }];
+    tracks.forEach(function(t, i) {
+      if (t.art) plates.push({ art: t.art, title: t.name, sub: t.bonus ? "Bonus Track " + t.num.slice(1) : "Track " + t.num, track: i });
+    });
+
+    /* ---------- PLAYER ---------- */
+    var audio = new Audio();
+    var currentTrackIndex = 0;
+    var isPlaying = false;
+    var playerArt = document.getElementById('playerArt');
+    var playerTrackName = document.getElementById('playerTrackName');
+    var playBtn = document.getElementById('playBtn');
+    var playIcon = document.getElementById('playIcon');
+    var pauseIcon = document.getElementById('pauseIcon');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var progressBar = document.getElementById('progressBar');
+    var progressFill = document.getElementById('progressFill');
+    var currentTimeEl = document.getElementById('currentTime');
+    var totalTimeEl = document.getElementById('totalTime');
+    var tracklist = document.getElementById('tracklist');
+
+    function formatTime(s) { if (isNaN(s)) return '0:00'; var m = Math.floor(s/60); var sec = Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+
+    function buildTracklist() {
+      tracklist.innerHTML = '';
+      tracks.forEach(function(track, i) {
+        var div = document.createElement('div');
+        div.className = 'cp-track' + (i === 0 ? ' active' : '');
+        div.innerHTML = '<span class="cp-track-num">'+track.num+'</span><span class="cp-track-name">'+track.name+(track.bonus?' <em style="opacity:0.55;font-size:0.85em">(Bonus)</em>':'')+'</span><span class="cp-track-dur" data-index="'+i+'">--:--</span>';
+        div.addEventListener('click', function() { currentTrackIndex = i; loadTrack(i); playTrack(); });
+        tracklist.appendChild(div);
+      });
+    }
+
+    function loadTrack(index) {
+      var t = tracks[index]; if (!t) return;
+      audio.src = SONG_DIR + encodeURIComponent(t.file); audio.load();
+      playerTrackName.textContent = t.name;
+      playerArt.src = t.art ? ART_DIR + 'thumbs/' + t.art + '.jpg' : COVER;
+      playerArt.alt = t.name;
+      tracklist.querySelectorAll('.cp-track').forEach(function(el,i){ el.classList.toggle('active', i===index); });
+      progressFill.style.width = '0%'; currentTimeEl.textContent = '0:00';
+    }
+
+    function playTrack() { audio.play().then(function(){ isPlaying=true; playIcon.style.display='none'; pauseIcon.style.display='block'; }).catch(function(){}); }
+    function pauseTrack() { audio.pause(); isPlaying=false; playIcon.style.display='block'; pauseIcon.style.display='none'; }
+
+    playBtn.addEventListener('click', function(){ if(isPlaying) pauseTrack(); else playTrack(); });
+    prevBtn.addEventListener('click', function(){ if(audio.currentTime>3){audio.currentTime=0;}else{currentTrackIndex=(currentTrackIndex-1+tracks.length)%tracks.length; loadTrack(currentTrackIndex); if(isPlaying) playTrack();} });
+    nextBtn.addEventListener('click', function(){ currentTrackIndex=(currentTrackIndex+1)%tracks.length; loadTrack(currentTrackIndex); if(isPlaying) playTrack(); });
+
+    audio.addEventListener('timeupdate', function(){ if(audio.duration){ progressFill.style.width=(audio.currentTime/audio.duration*100)+'%'; currentTimeEl.textContent=formatTime(audio.currentTime); } });
+    audio.addEventListener('loadedmetadata', function(){ totalTimeEl.textContent=formatTime(audio.duration); var d=tracklist.querySelector('[data-index="'+currentTrackIndex+'"]'); if(d) d.textContent=formatTime(audio.duration); });
+    audio.addEventListener('ended', function(){ if(currentTrackIndex<tracks.length-1){currentTrackIndex++;loadTrack(currentTrackIndex);playTrack();}else{pauseTrack();currentTrackIndex=0;loadTrack(0);} });
+    progressBar.addEventListener('click', function(e){ if(audio.duration){var r=progressBar.getBoundingClientRect(); audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;} });
+
+    /* ---------- ART BOOK ---------- */
+    var grid = document.getElementById('artbookGrid');
+    var viewer = document.getElementById('bookViewer');
+    var book = document.getElementById('book');
+    var bookImg = document.getElementById('bookImg');
+    var bookPlateNum = document.getElementById('bookPlateNum');
+    var bookTitle = document.getElementById('bookTitle');
+    var bookSub = document.getElementById('bookSub');
+    var bookCounter = document.getElementById('bookCounter');
+    var bookPlay = document.getElementById('bookPlay');
+    var bookPlayLabel = document.getElementById('bookPlayLabel');
+    var currentPlate = 0;
+    var lastFocus = null;
+
+    plates.forEach(function(p, i) {
+      var el = document.createElement('div');
+      el.className = 'plate';
+      el.tabIndex = 0;
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', 'Open plate ' + ROMAN[i] + ': ' + p.title);
+      el.innerHTML = '<img class="plate-img" loading="lazy" src="'+ART_DIR+'thumbs/'+p.art+'.jpg" alt="'+p.title+'">'
+        + '<div class="plate-num">Plate '+ROMAN[i]+'</div>'
+        + '<div class="plate-title">'+p.title+'</div>'
+        + '<div class="plate-sub">'+p.sub+'</div>';
+      el.addEventListener('click', function(){ openBook(i); });
+      el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openBook(i); } });
+      grid.appendChild(el);
+    });
+
+    function renderPlate(i) {
+      var p = plates[i];
+      bookImg.src = ART_DIR + p.art + '.jpg';
+      bookImg.alt = p.title;
+      bookPlateNum.textContent = 'Plate ' + ROMAN[i];
+      bookTitle.textContent = p.title;
+      bookSub.textContent = p.sub;
+      bookCounter.textContent = (i+1) + ' / ' + plates.length;
+      bookPlayLabel.textContent = p.track < 0 ? 'Play the album' : 'Play this track';
+      /* preload neighbours */
+      [i-1, i+1].forEach(function(n){ if(plates[n]) { var im = new Image(); im.src = ART_DIR + plates[n].art + '.jpg'; } });
+    }
+
+    function turn(dir) {
+      currentPlate = (currentPlate + dir + plates.length) % plates.length;
+      book.classList.remove('turn-next','turn-prev');
+      void book.offsetWidth;
+      book.classList.add(dir > 0 ? 'turn-next' : 'turn-prev');
+      setTimeout(function(){ renderPlate(currentPlate); }, 220);
+    }
+
+    function openBook(i) {
+      lastFocus = document.activeElement;
+      currentPlate = i || 0;
+      renderPlate(currentPlate);
+      viewer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ viewer.classList.add('visible'); }, 10);
+      document.getElementById('bvClose').focus();
+    }
+    function closeBook() {
+      viewer.classList.remove('visible');
+      document.body.style.overflow = '';
+      setTimeout(function(){ viewer.classList.remove('open'); }, 350);
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.getElementById('openBookBtn').addEventListener('click', function(){ openBook(0); });
+    document.getElementById('bvClose').addEventListener('click', closeBook);
+    document.getElementById('bvPrev').addEventListener('click', function(){ turn(-1); });
+    document.getElementById('bvNext').addEventListener('click', function(){ turn(1); });
+    viewer.addEventListener('click', function(e){ if(e.target === viewer) closeBook(); });
+    document.addEventListener('keydown', function(e){
+      if (!viewer.classList.contains('open')) return;
+      if (e.key === 'Escape') closeBook();
+      else if (e.key === 'ArrowRight') turn(1);
+      else if (e.key === 'ArrowLeft') turn(-1);
+    });
+    var touchX = null;
+    viewer.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, { passive: true });
+    viewer.addEventListener('touchend', function(e){
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) turn(dx < 0 ? 1 : -1);
+      touchX = null;
+    });
+    bookPlay.addEventListener('click', function(){
+      var t = plates[currentPlate].track;
+      currentTrackIndex = t < 0 ? 0 : t;
+      loadTrack(currentTrackIndex); playTrack();
+      closeBook();
+      document.getElementById('player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    /* ---------- NAV / REVEAL ---------- */
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY>80); });
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){ entries.forEach(function(entry){ if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);} }); }, {threshold:0.15});
+    reveals.forEach(function(el){ observer.observe(el); });
+
+    buildTracklist();
+    loadTrack(0);
+
+    /* Hamburger menu */
+    var hamburger = document.getElementById('navHamburger');
+    var navLinks = document.getElementById('navLinks');
+    var navOverlay = document.getElementById('navOverlay');
+    function toggleNav() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        navOverlay.style.display = 'block';
+        setTimeout(function(){ navOverlay.classList.add('visible'); }, 10);
+      } else {
+        navOverlay.classList.remove('visible');
+        setTimeout(function(){ navOverlay.style.display = 'none'; }, 300);
+      }
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { if (navLinks.classList.contains('open')) toggleNav(); }); });
+  </script>
+
+</body>
+</html>
