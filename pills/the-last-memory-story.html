@@ -130,19 +130,19 @@
       background: linear-gradient(180deg, transparent, #000 40%, #000 60%, transparent);
     }
 
-    /* Clinical (10): sterile, light, polite, empty */
+    /* Clinical (10): sterile, flat, polite, empty. Dark like the rest, but all warmth and glow removed */
     .chapter.clinical {
-      background: #e9ecef; color: #1c2025; padding: 70px 34px; margin: 40px -14px;
-      border: none; border-radius: 2px;
+      background: rgba(154,163,173,0.04);
+      padding: 70px 34px; margin: 40px -14px;
+      border: 1px solid rgba(154,163,173,0.18); border-radius: 2px;
     }
-    .chapter.clinical .ch-num { -webkit-text-stroke: 1px #9aa3ad; }
-    .chapter.clinical .ch-label { color: #6c757d; }
-    .chapter.clinical .ch-title { color: #1c2025; font-family: var(--font-heading); font-weight: 600; letter-spacing: 1px; }
-    .chapter.clinical .ch-story { color: #2b3036; }
-    .chapter.clinical .ch-quote { color: #495057; border-left-color: #adb5bd; font-style: normal; }
-    .chapter.clinical .ch-btn { color: #343a40; border-color: #ced4da; }
-    .chapter.clinical .ch-btn:hover { border-color: #6c757d; box-shadow: none; }
-    .chapter.clinical .ch-btn.atlas { color: #c1121f; border-color: rgba(193,18,31,0.4); }
+    .chapter.clinical .ch-num { -webkit-text-stroke: 1px #6c757d; opacity: 0.6; }
+    .chapter.clinical .ch-label { color: #8a939c; }
+    .chapter.clinical .ch-title { color: #cfd4da; font-family: var(--font-heading); font-weight: 600; letter-spacing: 1px; text-shadow: none; }
+    .chapter.clinical .ch-story { color: #b8bec5; }
+    .chapter.clinical .ch-quote { color: #9aa3ad; border-left-color: #6c757d; font-style: normal; }
+    .chapter.clinical .ch-btn { color: #b8bec5; border-color: rgba(154,163,173,0.25); }
+    .chapter.clinical .ch-btn:hover { border-color: #9aa3ad; box-shadow: none; }
 
     /* Asset (11): dreamy and beautiful, then nothing */
     .chapter.asset .ch-title { color: #fff; text-shadow: 0 0 24px rgba(201,184,255,0.45); }
