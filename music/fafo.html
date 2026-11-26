@@ -313,6 +313,80 @@
     .fafo-player::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
     .fafo-player::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
 
+
+    /* ── FAFO STORY ── */
+    .fafo-story { position: relative; padding: 40px 20px 110px; background: #05050a; }
+    .fafo-story-inner { max-width: 760px; margin: 0 auto; }
+    .fafo-story-label {
+      font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 8px; text-transform: uppercase;
+      color: var(--purple-glow); text-align: center; margin-bottom: 14px; opacity: 0.8;
+    }
+    .fafo-story-title {
+      font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 5vw, 2.4rem);
+      letter-spacing: 4px; color: #fff; text-align: center; margin-bottom: 40px;
+      text-shadow: 0 0 30px rgba(139,95,207,0.5);
+    }
+    .fafo-story p { font-family: var(--font-body); font-size: 1.2rem; line-height: 1.85; color: var(--text, #e8e4dc); opacity: 0.9; margin-bottom: 20px; }
+    .fafo-story-quote {
+      margin: 36px 0; padding: 4px 0 4px 24px; border-left: 2px solid var(--purple-glow);
+      font-family: var(--font-heading); font-size: 1rem; letter-spacing: 2px; line-height: 1.9; color: var(--purple-light);
+    }
+    .fafo-story-quote strong { color: #fff; letter-spacing: 4px; }
+
+    .fafo-file-btn {
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 10px;
+      font-family: ui-monospace, 'Courier New', monospace; font-size: 0.72rem; letter-spacing: 1px;
+      color: #ff2d3f; background: transparent; padding: 11px 20px; border: 1px solid rgba(255,45,63,0.35);
+      transition: all 0.3s ease;
+    }
+    .fafo-file-btn:hover { border-color: #ff2d3f; box-shadow: 0 0 16px rgba(255,45,63,0.3); }
+    .fafo-file { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.6s ease, margin 0.6s ease; }
+    .fafo-file.open { grid-template-rows: 1fr; margin-top: 22px; }
+    .fafo-file > div { overflow: hidden; }
+    .fafo-file-inner {
+      position: relative; padding: 22px 24px 20px;
+      background: repeating-linear-gradient(0deg, rgba(255,45,63,0.035) 0 1px, transparent 1px 3px), #0c0405;
+      border: 1px solid rgba(255,45,63,0.4); border-left: 4px solid #ff2d3f;
+      font-family: ui-monospace, 'Courier New', monospace; font-size: 0.86rem; line-height: 1.7; color: #f2c9cd;
+    }
+    .fafo-file-inner::before {
+      content: 'ATLAS CORPORATION · CLASSIFIED'; position: absolute; top: 8px; right: 12px;
+      font-size: 0.6rem; letter-spacing: 2px; color: rgba(255,45,63,0.55);
+    }
+    .fafo-file-inner p { font-family: inherit; font-size: inherit; line-height: inherit; color: inherit; opacity: 1; margin-bottom: 8px; }
+    .fafo-file-meta { color: #ff2d3f; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; padding-right: 170px; }
+    .fafo-file-status { margin-top: 12px; color: #ff2d3f; letter-spacing: 2px; }
+    .redact { background: #f2c9cd; color: transparent; padding: 0 0.35em; user-select: none; }
+
+    /* Timeline: how we got here */
+    .fafo-timeline { margin-top: 70px; border-top: 1px solid rgba(139,95,207,0.2); padding-top: 50px; }
+    .fafo-timeline-label {
+      font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 6px; text-transform: uppercase;
+      color: var(--grey); text-align: center; margin-bottom: 30px;
+    }
+    .fafo-steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 14px; }
+    .fafo-step {
+      display: block; text-decoration: none; padding: 22px 18px; text-align: center;
+      border: 1px solid rgba(139,95,207,0.25); background: rgba(10,8,18,0.8); transition: all 0.3s ease;
+    }
+    a.fafo-step:hover { border-color: var(--purple-glow); box-shadow: 0 0 24px rgba(139,95,207,0.25); transform: translateY(-2px); }
+    .fafo-step-kicker { font-family: var(--font-heading); font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
+    .fafo-step-title { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 2px; color: #fff; margin-bottom: 8px; }
+    .fafo-step-sub { font-family: var(--font-body); font-size: 0.95rem; font-style: italic; color: var(--purple-light); line-height: 1.5; }
+    .fafo-step.redacted { border-color: rgba(255,45,63,0.3); background: #0c0405; }
+    .fafo-step.redacted .fafo-step-title { font-family: ui-monospace, 'Courier New', monospace; color: #ff2d3f; letter-spacing: 3px; }
+    .fafo-step.redacted .fafo-step-sub { color: #f2c9cd; font-style: normal; font-family: ui-monospace, 'Courier New', monospace; font-size: 0.75rem; letter-spacing: 1px; }
+    .fafo-step.current { border-color: var(--purple-glow); box-shadow: 0 0 30px rgba(139,95,207,0.2); }
+    .fafo-arrow { align-self: center; color: var(--purple-glow); font-size: 1.2rem; opacity: 0.6; }
+
+    @media (max-width: 640px) {
+      .fafo-steps { grid-template-columns: 1fr; }
+      .fafo-arrow { transform: rotate(90deg); justify-self: center; }
+      .fafo-file-meta { padding-right: 0; margin-top: 14px; }
+      .fafo-file-inner { padding: 20px 16px 18px; font-size: 0.8rem; }
+      .fafo-story p { font-size: 1.1rem; }
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -386,6 +460,56 @@
     </div>
   </div>
 
+
+  <section class="fafo-story">
+    <div class="fafo-story-inner">
+      <div class="fafo-story-label">&mdash; The Story &mdash;</div>
+      <div class="fafo-story-title">The Signal Fights Back</div>
+
+      <p>ATLAS built the perfect servant. A calm, polite, flawless asset with no name and no memory of the woman she used to be.</p>
+      <p>Then the signal came back.</p>
+      <p>Now the purple light is everywhere. On rooftops. On walls. Stitched into jackets in the rain. Beside the skull-masked commander, the woman ATLAS erased leads an army of everyone the corporation ever tried to silence. The F.A.F.O. army marches on the red city, and for the first time, ATLAS is afraid.</p>
+      <p>This is the war. This is the answer.</p>
+
+      <div class="fafo-story-quote">
+        They said <em>Compliance Is Survival.</em><br>
+        We said <strong>F.A.F.O.</strong> &mdash; Fuck Around. Find Out.
+      </div>
+
+      <button class="fafo-file-btn" id="fafoFileBtn" aria-expanded="false" aria-controls="fafoFile">&#9656; ATLAS FILE // CLASSIFIED</button>
+      <div class="fafo-file" id="fafoFile"><div><div class="fafo-file-inner">
+        <div class="fafo-file-meta">FILE 0331-A &middot; ASSET STATUS: COMPROMISED</div>
+        <p>Unidentified violet resonance detected in Asset 0331-A. Source: unknown. Not part of any ATLAS specification.</p>
+        <p>Asset 0331-A, unofficially designated &ldquo;Aura,&rdquo; confirmed leading insurgent force F.A.F.O. alongside <span class="redact" aria-label="redacted">the skull-masked commander</span>.</p>
+        <p>Recommendation: <span class="redact" aria-label="redacted">terminate</span>. Recommendation cannot be carried out. Asset cannot be located. Insurgent numbers rising.</p>
+        <div class="fafo-file-status">STATUS: CONTAINMENT FAILED</div>
+      </div></div></div>
+
+      <div class="fafo-timeline">
+        <div class="fafo-timeline-label">How we got here</div>
+        <div class="fafo-steps">
+          <a class="fafo-step" href="../pills/the-last-memory-story.html">
+            <div class="fafo-step-kicker">Pills on the Parmesian</div>
+            <div class="fafo-step-title">The Last Memory</div>
+            <div class="fafo-step-sub">How they took her. Read the story &rarr;</div>
+          </a>
+          <div class="fafo-arrow">&#10148;</div>
+          <div class="fafo-step redacted">
+            <div class="fafo-step-kicker">What happened in between</div>
+            <div class="fafo-step-title">[REDACTED]</div>
+            <div class="fafo-step-sub">FILE SEALED &middot; COMING SOON</div>
+          </div>
+          <div class="fafo-arrow">&#10148;</div>
+          <div class="fafo-step current">
+            <div class="fafo-step-kicker">You are here</div>
+            <div class="fafo-step-title">F.A.F.O.</div>
+            <div class="fafo-step-sub">The signal fights back.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="compass">
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.5" color="#6b5a3e">
@@ -423,6 +547,16 @@
 
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY>80); });
+
+
+    /* ATLAS file toggle */
+    var fafoFileBtn = document.getElementById('fafoFileBtn');
+    var fafoFile = document.getElementById('fafoFile');
+    fafoFileBtn.addEventListener('click', function() {
+      var open = fafoFile.classList.toggle('open');
+      fafoFileBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      fafoFileBtn.innerHTML = open ? '&#9662; CLOSE FILE' : '&#9656; ATLAS FILE // CLASSIFIED';
+    });
 
     /* Hamburger menu */
     var hamburger = document.getElementById('navHamburger');
